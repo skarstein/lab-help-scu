@@ -1,21 +1,26 @@
 CREATE TABLE User(
-    username varchar(20) PRIMARY KEY,
+    username varchar(20),
     password varchar(40),
-    type char(2), CHECK (type IN ('ST','TA'))
+    type char(2), CHECK (type IN ('ST','TA')),
+    PRIMARY KEY (username)
 );
 
 CREATE TABLE Question(
-    q_id int(7) PRIMARY KEY,
-    s_id REFERENCES Session(s_id),
-    username REFERENCES User(username),
+    q_id int(7),
+    s_id varchar(10),
+    username varchar(20),
     t_stamp timestamp,
     question_content varchar(1000),
     answer_content varchar(1000),
+    PRIMARY KEY (q_id),
+    FOREIGN KEY(s_id) REFERENCES Session(s_id),
+    FOREIGN KEY(username) REFERENCES User(username)
 );
 
 CREATE TABLE Session(
-    s_id varchar(10) PRIMARY KEY,
+    s_id varchar(10),
     class_name varchar(10),
     t_stamp timestamp,
+    PRIMARY KEY (s_id)
 );
 
