@@ -57,7 +57,7 @@
         //    $_SESSION["username"] 
         $username = $_POST["usernameInput"];
         //$_SESSION["sessionId"] 
-        $sessionId = $_POST["sessionIdInput"];
+        $sessionID = $_POST["sessionIdInput"];
         $password = $_POST["passwordInput"];
 
         $sql = "SELECT * FROM User WHERE username = '" .$username. "'";
@@ -69,7 +69,7 @@
         } else {
             if ($result->fetch_assoc()["type"] == "ST") {
                 if ($result->fetch_assoc()["password"] == $password){
-                    $sql = "SELECT * FROM Session WHERE s_id = '" .$sessionId. "'";
+                    $sql = "SELECT * FROM Session WHERE s_id = '" .$sessionID. "'";
                     $result = $conn->query($sql);
                 
                     if ($result->num_rows == 1){
@@ -89,8 +89,8 @@
 
         if ($valid){
             $_SESSION["username"] = $username;
-            $_SESSION["sessionId"] = $sessionId;
-            $_SESSION["className"] = "st";
+            $_SESSION["sessionID"] = $sessionID;
+            $_SESSION["userType"] = "ST";
              
             header('Location: http://students.engr.scu.edu/~skarstei/student.php');
             exit();
@@ -99,7 +99,7 @@
     ?>
 
     Welcome <?php echo $_SESSION["username"]; ?><br>
-    Your session is: <?php echo $_SESSION["sessionId"]; ?> 
+    Your session is: <?php echo $_SESSION["sessionID"]; ?> 
 
 
 <!--    <script>
