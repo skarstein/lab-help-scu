@@ -2,4 +2,4 @@
 
 
 chmod -R 777 *
-rsync -av ./* /webpages/skarstei
+rsync -av ./* /webpages/blee

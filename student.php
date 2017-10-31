@@ -3,6 +3,7 @@
 <html>
   <title>Student page</title>
 
+  <?php require './db_php/connect.php';?>
   <?php include './partials/head.php';?>
 
   <?php
@@ -11,19 +12,6 @@
     $_SESSION["className"]="Coen174L";
     $_SESSION["sessionID"]="123456";
     $_SESSION["userType"]="st";
-
-    //check if session variables are set, if not redirect to login screen
-
-      $servername = "dbserver.engr.scu.edu";
-      $username = "skarstei";
-      $password = "00001015034";
-      $dbname = "sdb_skarstei";
-
-      $conn = new mysqli($servername, $username, $password, $dbname);
-
-      if ($conn->connect_error){
-          die("Connection failed: " .$conn->connect_error);
-      }
   ?>
 
   <body>
@@ -52,34 +40,31 @@
       </div>
     </div>
 
-    <?php
-    if (isset($_POST["question"])){
-      echo "your question is: " .$_POST["question"]. "<br>";
-      $questionID=rand(0,9999999);
-      echo "your question ID is: " .$questionID. "<br>";
+        <?php
+        if (isset($_POST["question"])){
 
-      $sql = "INSERT INTO Question (q_id,s_id,username,question_content)
-      VALUES (" .$questionID. ",'" .$_SESSION["sessionID"]. "','" .$_SESSION["username"]. "','"
-      .$_POST["question"]. "')";
+          $sql = "INSERT INTO Question (q_id,s_id,username,question_content)
+          VALUES (" .$questionID. ",'" .$_SESSION["sessionID"]. "','" .$_SESSION["username"]. "','"
+          .$_POST["question"]. "')";
 
-      if ($conn->query($sql) === TRUE) {
-          echo "New record created successfully";
-          header('Location: '.$_SERVER['REQUEST_URI']);
-           
-      } else {
-          echo "Error: " .$sql. "<br>" .$conn->error;
-      }
-    }
+          if ($conn->query($sql) === TRUE) {
+              echo "New record created successfully";
+              header('Location: '.$_SERVER['REQUEST_URI']);
+               
+          } else {
+              echo "Error: " .$sql. "<br>" .$conn->error;
+          }
+        }
 
-    $sql = "SELECT q_id FROM Question";
-    $result = $conn->query($sql);
+        $sql = "SELECT q_id FROM Question";
+        $result = $conn->query($sql);
 
-    while($row = $result->fetch_assoc()){
-        echo "<br> question ID: ".$row['q_id']."<br>";
-    }
+        while($row = $result->fetch_assoc()){
+            echo "<br> question ID: ".$row['q_id']."<br>";
+        }
 
-    $conn->close();
-    ?>
+        $conn->close();
+        ?>
 
   </body>
 </html>
