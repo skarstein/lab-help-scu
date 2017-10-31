@@ -8,10 +8,13 @@
 
   <?php
     session_start();
-    $_SESSION["username"]="sean";
     $_SESSION["className"]="Coen174L";
     $_SESSION["sessionID"]="123456";
     $_SESSION["userType"]="st";
+    $_SESSION["username"]="sean";
+    if (! isset($_SESSION["username"])){
+       header('Location: http://students.engr.scu.edu/~ngoodpas/qa_student.php'); 
+    }
   ?>
 
   <body>
@@ -56,7 +59,7 @@
           }
         }
 
-        $sql = "SELECT q_id FROM Question";
+        $sql = "SELECT q_id FROM Question WHERE username = " .$_SESSION["username"]. "";
         $result = $conn->query($sql);
 
         while($row = $result->fetch_assoc()){
