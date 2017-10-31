@@ -57,18 +57,25 @@
     </div>
 
     <?php 
-        if (isset($_POST["username"], $_POST["password"], $_POST["confpassword"], $_POST["student_type"])) {
+
+	
+        echo "Hello";
+        echo "Hello";
+        if (isset($_POST["usernameInput"], $_POST["passwordInput"], $_POST["ta_action"])) {
+            echo "Hmmmmm";
             $valid = false;
             $username = $_POST["usernameInput"];
             $action = $_POST["ta_action"];
             if ($action == "Join"){
+                echo "in join";
         	    if (isset($_POST["sessionIdInput"])) {
                     $sessionID = $_POST["sessionIdInput"];    
 	    	    } else {
-		            echo "Please Enter a Session Key";
+		            echo ("Please Enter a Session Key");
 		            exit();		
 		        }
             } else {
+                echo "in create";
         	    if (isset($_POST["classNameInput"])) {
 		            $className = $_POST["classNameInput"]; 
                     $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
@@ -86,11 +93,21 @@
             $password = $_POST["passwordInput"];
             $sql = "SELECT * FROM User WHERE username = '" .$username. "'";
             $result = $conn->query($sql);
+	/*$sql = "SELECT * from User WHERE username = 'yang'";
+        $result = $conn->query($sql);
+	echo "yang pass: " .$result->fetch_assoc()["password"];
+        while($row = $result->fetch_assoc()){
+            foreach($row as $cname => $cval){
+                echo " " .$cname. ": " .$cval. "\n";
+            }
+        }*/
+	//echo "yang pass: " .$result->fetch_assoc()["password"];
             if ($result->num_rows != 1){
                 echo "Username Not Found\n";
                 //echo $result->fetch_assoc()["username"];
             } else {
                 if ($result->fetch_assoc()["type"] == "TA") {
+                    echo "Pass: " .$password. " Correct Pass: " .$result->fetch_assoc()["password"];
 	                if ($result->fetch_assoc()["password"] == $password){
 		                if ($action == "Join"){
 			                $sql = "SELECT * FROM Session WHERE s_id = '" .$sessionID. "'";
