@@ -11,5 +11,6 @@
   <link rel="stylesheet" href="assets/css/custom.css" rel="stylesheet" type="text/css" >
 
   <!-- JS Libraries -->
-  <script src="/~blee/assets/js/jquery-3.2.1.min.js"></script>
+  <script src="assets/js/jquery-3.2.1.min.js"></script>
+  <script src="assets/js/jquery.validate.min.js"></script>
 </head>
