@@ -13,7 +13,7 @@
           <h1>TA Help Seeking System</h1>
         </div>
       </div>
-      <form role="form" action = "qa_student.php" method ="post">
+      <form role="form" action = "student_login.php" method ="post">
         <div class="form-group">
           <label for="usernameInput">Username</label>
           <input type="text" class="form-control" name="usernameInput" placeholder="Enter Username">
@@ -68,7 +68,9 @@
             //echo $result->fetch_assoc()["username"];
         } else {
             if ($result->fetch_assoc()["type"] == "ST") {
+		mysqli_data_seek($result,0);
                 if ($result->fetch_assoc()["password"] == $password){
+		    mysqli_data_seek($result,0);
                     $sql = "SELECT * FROM Session WHERE s_id = '" .$sessionID. "'";
                     $result = $conn->query($sql);
                 
