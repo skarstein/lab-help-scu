@@ -3,6 +3,7 @@
 <html>
   <title>Create Account</title>
 
+  <?php require './db_php/connect.php';?>
   <?php include './partials/head.php';?>
 
   <body>
@@ -10,27 +11,15 @@
     <div class="container">
       <div class="row">
         <div class="col">
-
-        <!--
-          Student
-          <label class="switch">
-            <input type="checkbox" onclick="toggle()">
-            <span class="slider round"></span>
-          </label>
-          TA
-          -->
-
-  
-
-          <form action="/create.php" method="POST">
+          <form action="" method="POST">
             <div class="form-check form-check-inline">
               <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="student_type" value="student" checked="checked"> Student
+                <input class="form-check-input" type="radio" name="student_type" value="ST" checked="checked"> Student
               </label>
             </div>
             <div class="form-check form-check-inline">
               <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="student_type" value="ta"> TA
+                <input class="form-check-input" type="radio" name="student_type" value="TA"> TA
               </label>
             </div>
             <div class="form-group">
@@ -46,19 +35,47 @@
               <input type="password" class="form-control" name="confpassword" placeholder="Retype Password"/>
             </div>
 
-            <?php if(isset($student_type) && $student_type=="ta") { ?> 
-              <div id="myDIV" class="form-group">
-                <label for="tacred">TA Cridential:</label>
-                <input type="text" class="form-control" name="tacred"/>
-              </div>
-            <?php } ?>
-
+            <div id="tacred_form" class="form-group" style="display:none">
+              <label for="tacred">TA Credential:</label>
+              <input type="password" class="form-control" name="tacred" placeholder="TA Credential"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Create Account</button>
           </form>
-
         </div>
       </div>
     </div>
 
-    <script src="/~blee/assets/js/create_js.js"></script>
+      <?php
+      if (isset($_POST["username"], $_POST["password"], $_POST["confpassword"], $_POST["student_type"])) {
+
+        if ($_POST["password"] !== $_POST["confpassword"]) {
+           $message = "Passwords do not match.";
+           echo $message;
+        }
+        else {
+          $sql = "INSERT INTO User VALUES ('" .$_POST["username"]. "','" .$_POST["password"]. "','" .$_POST["student_type"]. "')";
+
+          if ($conn->query($sql) === TRUE) {
+              echo "New account created successfully";
+              header('Location: '.$_SERVER['REQUEST_URI']);
+               
+          } else {
+              echo "Error: could not create account";
+          }
+        }
+      }
+
+      $sql = "SELECT username FROM User";
+      $result = $conn->query($sql);
+
+      while($row = $result->fetch_assoc()){
+          echo $row;
+          echo "<br> username: ".$row['username']." ".$row['password']."<br>";
+      }
+
+      $conn->close();
+      ?>
+
+    <script type="text/javascript" src="assets/js/create_js.js"></script>
   </body>
 </html>
