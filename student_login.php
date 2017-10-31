@@ -2,8 +2,8 @@
 
 <html>
 
-    <?php include './partials/head.php';?>
     <?php require './db_php/connect.php';?>
+    <?php include './partials/head.php';?>
 
   <body>
 
@@ -46,7 +46,13 @@
 
         $valid = false;
         
-        
+        $sql = "SELECT * from User WHERE username = 'sean'";
+        $result = $conn->query($sql);
+        while($row = $result->fetch_assoc()){
+            foreach($row as $cname => $cval){
+                echo " " .$cname. ": " .$cval. "\n";
+            }
+        }
         
         //    $_SESSION["username"] 
         $username = $_POST["usernameInput"];
@@ -54,32 +60,39 @@
         $sessionId = $_POST["sessionIdInput"];
         $password = $_POST["passwordInput"];
 
-        $sql = "SELECT username,password FROM User WHERE username = (" .$username. ")";
+        $sql = "SELECT * FROM User WHERE username = '" .$username. "'";
         $result = $conn->query($sql);
 
         if ($result->num_rows != 1){
-            echo "Username Not Found";
+            echo "Username Not Found\n";
+            //echo $result->fetch_assoc()["username"];
         } else {
-            if ($result->fetch_assoc()["password"] == $password){
-                $sql = "SELECT * FROM Session WHERE s_id = (" .$sessionId. ")";
-                $result = $conn->query($sql);
+            if ($result->fetch_assoc()["type"] == "ST") {
+                if ($result->fetch_assoc()["password"] == $password){
+                    $sql = "SELECT * FROM Session WHERE s_id = '" .$sessionId. "'";
+                    $result = $conn->query($sql);
                 
-                if ($result->num_rows == 1){
-                    echo "SUCESS";
-                    $valid = true;
+                    if ($result->num_rows == 1){
+                        echo "SUCESS";
+                        $valid = true;
+                        $_SESSION["className"] = $result->fetch_assoc()["class_name"];
+                    } else {
+                        echo "Session Not Found";
+                    }
                 } else {
-                    echo "Session Not Found";
-                }
+                    echo "Password Incorrect";
+                } 
             } else {
-                echo "Password Incorrect";
-            } 
+                echo "This login form is for students only";
+            }
         }
 
         if ($valid){
             $_SESSION["username"] = $username;
             $_SESSION["sessionId"] = $sessionId;
+            $_SESSION["className"] = "st";
              
-            header('Location: students.engr.scu.edu/~skarstei/student.php');
+            header('Location: http://students.engr.scu.edu/~skarstei/student.php');
             exit();
         }
 
