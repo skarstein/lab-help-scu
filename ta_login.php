@@ -125,7 +125,7 @@
             if ($valid){
                 $_SESSION["username"] = $username;
                 $_SESSION["sessionID"] = $sessionID;
-                $_SESSION["type"] = "TA";
+                $_SESSION["userType"] = "TA";
                 header('Location: http://students.engr.scu.edu/~skarstei/ta.php');
                 exit();
             }
