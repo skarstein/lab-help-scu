@@ -2,7 +2,8 @@
 
 <html>
 
-  <?php include './partials/head.php';?>
+    <?php include './partials/head.php';?>
+    <?php require './db_php/connect.php';?>
 
   <body>
 
@@ -42,8 +43,46 @@
 
     <?php 
         session_start();
-        $_SESSION["username"] = $_POST["usernameInput"];
-        $_SESSION["sessionId"] =$_POST["sessionIdInput"];
+
+        $valid = false;
+        
+        
+        
+        //    $_SESSION["username"] 
+        $username = $_POST["usernameInput"];
+        //$_SESSION["sessionId"] 
+        $sessionId = $_POST["sessionIdInput"];
+        $password = $_POST["passwordInput"];
+
+        $sql = "SELECT username,password FROM User WHERE username =" .$username.;
+        $result = $conn->query($sql);
+
+        if ($result->num_rows != 1){
+            echo "Username Not Found";
+        } else {
+            if ($result->fetch_assoc()["password"] == $password){
+                $sql = "SELECT * FROM Session WHERE s_id = " .$sessionId.;
+                $result = $conn->query($sql);
+                
+                if ($result->num_rows == 1){
+                    echo "SUCESS";
+                    $valid = true;
+                } else {
+                    echo "Session Not Found";
+                }
+            } else {
+                echo "Password Incorrect";
+            } 
+        }
+
+        if ($valid){
+            $_SESSION["username"] = $username;
+            $_SESSION["sessionId"] = $sessionId;
+             
+            header('Location: students.engr.scu.edu/~skarstei/student.php');
+            exit();
+        }
+
     ?>
 
     Welcome <?php echo $_SESSION["username"]; ?><br>
