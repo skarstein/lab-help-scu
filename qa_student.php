@@ -54,14 +54,14 @@
         $sessionId = $_POST["sessionIdInput"];
         $password = $_POST["passwordInput"];
 
-        $sql = "SELECT username,password FROM User WHERE username =" .$username.;
+        $sql = "SELECT username,password FROM User WHERE username = (" .$username. ")";
         $result = $conn->query($sql);
 
         if ($result->num_rows != 1){
             echo "Username Not Found";
         } else {
             if ($result->fetch_assoc()["password"] == $password){
-                $sql = "SELECT * FROM Session WHERE s_id = " .$sessionId.;
+                $sql = "SELECT * FROM Session WHERE s_id = (" .$sessionId. ")";
                 $result = $conn->query($sql);
                 
                 if ($result->num_rows == 1){
