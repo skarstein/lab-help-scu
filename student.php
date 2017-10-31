@@ -39,7 +39,7 @@
     </div>
       <div class="row">
         <div class="col">
-          <form action="/~skarstei/student.php" method="POST">
+          <form action="" method="POST">
             <div class="form-group">
               <label for="question">Question:</label>
               <input type="text" class="form-control" name="question" placeholder="Question"/>
@@ -64,13 +64,14 @@
 
       if ($conn->query($sql) === TRUE) {
           echo "New record created successfully";
-          
+          header('Location: '.$_SERVER['REQUEST_URI']);
+           
       } else {
           echo "Error: " .$sql. "<br>" .$conn->error;
       }
     }
 
-    $sql = "SELECT q_id FROM Question WHERE s_id=" .$;
+    $sql = "SELECT q_id FROM Question";
     $result = $conn->query($sql);
 
     while($row = $result->fetch_assoc()){
