@@ -56,18 +56,13 @@
       <p id = "p"></p>  
     </div>
 
-    <?php 
-
-	
-        echo "Hello";
-        echo "Hello";
+    <?php
         if (isset($_POST["usernameInput"], $_POST["passwordInput"], $_POST["ta_action"])) {
-            echo "Hmmmmm";
             $valid = false;
             $username = $_POST["usernameInput"];
             $action = $_POST["ta_action"];
             if ($action == "Join"){
-                echo "in join";
+                //echo "in join";
         	    if (isset($_POST["sessionIdInput"])) {
                     $sessionID = $_POST["sessionIdInput"];    
 	    	    } else {
@@ -75,8 +70,7 @@
 		            exit();		
 		        }
             } else {
-                echo "in create";
-        	    if (isset($_POST["classNameInput"])) {
+         	    if (isset($_POST["classNameInput"])) {
 		            $className = $_POST["classNameInput"]; 
                     $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
                     $sessionID = '';
@@ -89,31 +83,21 @@
 		            exit();
                 }
             } 
-            echo "session: " .$sessionID;           
             $password = $_POST["passwordInput"];
             $sql = "SELECT * FROM User WHERE username = '" .$username. "'";
             $result = $conn->query($sql);
-	/*$sql = "SELECT * from User WHERE username = 'yang'";
-        $result = $conn->query($sql);
-	echo "yang pass: " .$result->fetch_assoc()["password"];
-        while($row = $result->fetch_assoc()){
-            foreach($row as $cname => $cval){
-                echo " " .$cname. ": " .$cval. "\n";
-            }
-        }*/
-	//echo "yang pass: " .$result->fetch_assoc()["password"];
+	
+
             if ($result->num_rows != 1){
                 echo "Username Not Found\n";
-                //echo $result->fetch_assoc()["username"];
             } else {
                 if ($result->fetch_assoc()["type"] == "TA") {
-                    echo "Pass: " .$password. " Correct Pass: " .$result->fetch_assoc()["password"];
+		    mysqli_data_seek($result,0);
 	                if ($result->fetch_assoc()["password"] == $password){
 		                if ($action == "Join"){
 			                $sql = "SELECT * FROM Session WHERE s_id = '" .$sessionID. "'";
                             $result = $conn->query($sql);
                             if ($result->num_rows == 1){
-                                echo "SUCESS";
 		                        session_start();
                                 $valid = true;
                                 $_SESSION["className"] = $result->fetch_assoc()["class_name"];
@@ -140,7 +124,7 @@
             }
             if ($valid){
                 $_SESSION["username"] = $username;
-                $_SESSION["sessionId"] = $sessionId;
+                $_SESSION["sessionID"] = $sessionID;
                 $_SESSION["type"] = "TA";
                 header('Location: http://students.engr.scu.edu/~skarstei/ta.php');
                 exit();
@@ -148,23 +132,6 @@
         }
     ?>
 
-    <!--Welcome <?php echo $_SESSION["username"]; ?><br>
-    Your session is: <?php echo $_SESSION["sessionId"]; ?> -->
-
-
-<!--    <script>
-        var p = document.getElementById("p")
-        var password = document.getElementById("passwordInput")
-        var username = document.getElementById("usernameInput")
-        var sessionId = document.getElementById("sessionIdInput")
-
-        function handleSubmitButtonClick(){
-            p.innerHTML = username + " : " + password + " : " + sessionId
-            //Check if credentials are accurate
-            //Hide Form, and load Questions
-            //
-        }
-    </script> -->
 
     <script type="text/javascript" src="assets/js/ta_login_js.js"></script>
   </body>
