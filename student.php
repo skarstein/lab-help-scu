@@ -62,7 +62,8 @@
           }
         }
 
-        $sql = "SELECT * FROM Question WHERE (username = '" .$_SESSION["username"]. "') ORDER BY t_stamp DESC";
+        $sql = "SELECT * FROM Question WHERE (username = '" .$_SESSION["username"]. "') 
+        AND s_id='" .$_SESSION['sessionID']. "' ORDER BY t_stamp DESC";
         $result = $conn->query($sql);
         ?>
 
