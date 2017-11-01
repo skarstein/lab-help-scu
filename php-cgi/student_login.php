@@ -2,12 +2,11 @@
 
 <html>
 
-    <?php require './db_php/connect.php';?>
-    <?php include './partials/head.php';?>
+  <?php require './partials/head.php';?>
 
   <body>
 
-    <div class="container">
+    <div class="container main">
       <div class="row">
         <div class="col">
           <h1>TA Help Seeking System</h1>
@@ -26,13 +25,12 @@
           <label for="sessionIdInput">Session Id</label>
           <input type="password" class="form-control" name="sessionIdInput" placeholder="Session Id">
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
       </form>
       <p id = "p"></p>  
     </div>
 
-    <?php 
-        echo "" .$_POST['sessionIdInput'];
+    <?php
         if (!empty($_POST["usernameInput"]) && !empty($_POST["passwordInput"]) && !empty($_POST["sessionIdInput"])) {
             session_start();
 

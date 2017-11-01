@@ -3,8 +3,7 @@
 <html>
   <title>Student page</title>
 
-  <?php require './db_php/connect.php';?>
-  <?php include './partials/head.php';?>
+  <?php require './partials/head.php';?>
 
   <?php
     session_start();
@@ -13,7 +12,7 @@
     //$_SESSION["userType"]="st";
     //$_SESSION["username"]="sean";
     if (! isset($_SESSION["username"])){
-       header('Location: http://students.engr.scu.edu/~ngoodpas/student_login.php'); 
+       header('Location: http://students.engr.scu.edu/~'.$DEV_WEB_HOME.'/student_login.php'); 
     }
     if ($_SESSION["userType"]=="TA"){
         header('Location: ta.php');
@@ -22,7 +21,7 @@
 
   <body>
 
-    <div class="container">
+    <div class="container main">
     <div class="page-header">
       <h1>
         <?php 

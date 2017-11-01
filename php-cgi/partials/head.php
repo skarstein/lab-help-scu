@@ -13,4 +13,12 @@
   <!-- JS Libraries -->
   <script src="assets/js/jquery-3.2.1.min.js"></script>
   <script src="assets/js/jquery.validate.min.js"></script>
+
+  <?php 
+  // Load required php
+
+  require './dev/settings.php';
+  require './db_php/connect.php';
+
+  ?>
 </head>
