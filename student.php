@@ -13,7 +13,7 @@
     //$_SESSION["userType"]="st";
     //$_SESSION["username"]="sean";
     if (! isset($_SESSION["username"])){
-       header('Location: http://students.engr.scu.edu/~ngoodpas/qa_student.php'); 
+       header('Location: http://students.engr.scu.edu/~ngoodpas/student_login.php'); 
     }
     if ($_SESSION["userType"]=="TA"){
         header('Location: ta.php');
