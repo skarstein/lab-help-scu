@@ -11,6 +11,7 @@
     <div class="container">
       <div class="row">
         <div class="col">
+          <h1>Create a New Account</h1>
           <form action="" method="POST">
             <div class="form-check form-check-inline">
               <label class="form-check-label">
@@ -46,31 +47,43 @@
     </div>
 
       <?php
-      if (isset($_POST["username"], $_POST["password"], $_POST["confpassword"], $_POST["student_type"])) {
 
+      $validated = false;
+      if (isset($_POST["username"], $_POST["password"], $_POST["confpassword"], $_POST["student_type"])) {
         if ($_POST["password"] !== $_POST["confpassword"]) {
            $message = "Passwords do not match.";
            echo $message;
         }
         else {
-          $sql = "INSERT INTO User VALUES ('" .$_POST["username"]. "','" .$_POST["password"]. "','" .$_POST["student_type"]. "')";
-
-          if ($conn->query($sql) === TRUE) {
-              echo "New account created successfully";
-              header('Location: '.$_SERVER['REQUEST_URI']);
-               
-          } else {
-              echo "Error: could not create account";
+          if ($_POST["tacred"] !== '') {
+            if($_POST["tacred"] == "tempkey") {
+              $sql = "INSERT INTO User VALUES ('" .$_POST["username"]. "','" .$_POST["password"]. "','" .$_POST["student_type"]. "')";
+              $validated = true;
+            }
+            $message = "TA Credential Incorrect.";
+            echo $message;
+          }
+          else {
+            $sql = "INSERT INTO User VALUES ('" .$_POST["username"]. "','" .$_POST["password"]. "','" .$_POST["student_type"]. "')";
+            $validated = true;
           }
         }
       }
+      if ($validated) {
+        if ($conn->query($sql) === TRUE) {
+          echo "New account created successfully";
+          header('Location: '.$_SERVER['REQUEST_URI']);   
+        } 
+        else {
+          echo "Error: could not create account";
+        }
+      }
 
-      $sql = "SELECT username FROM User";
+      $sql = "SELECT username, password, type FROM User";
       $result = $conn->query($sql);
 
       while($row = $result->fetch_assoc()){
-          echo $row;
-          echo "<br> username: ".$row['username']." ".$row['password']."<br>";
+          echo "<br> username: ".$row['username']." ".$row['password']."<br>"." ".$row['type']."<br>";
       }
 
       $conn->close();
