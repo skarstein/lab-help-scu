@@ -114,7 +114,7 @@
                     $_SESSION["username"] = $username;
                     $_SESSION["sessionID"] = $sessionID;
                     $_SESSION["userType"] = "TA";
-                    header('Location: http://students.engr.scu.edu/~skarstei/ta.php');
+                    header('Location: ta.php');
                     exit();
                 }
             //}
