@@ -26,47 +26,17 @@
     <div class="page-header">
       <h1>
         <?php 
+        echo "" .$_SESSION["className"]. " Q&A Session " .$_SESSION["sessionID"]. "<br>";
         echo "your username is: " .$_SESSION["username"]. "<br>";
-        echo "your class name is: " .$_SESSION["className"]. "<br>";
-        echo "session: " .$_SESSION["sessionID"]. "<button type='button'>End Session</button><br>";
         ?>
       </h1>
     </div>
       <div class="row">
         <div class="col">
-        <!--
-          <form action="" method="POST">
-            <div class="form-group">
-              <label for="question">Question:</label>
-              <input type="text" class="form-control" name="question" placeholder="Question"/>
-            </div>
-            <div class="form-group">
-              <input type="submit" value="Submit">
-            </div>
-          </form>
-        --!>
         </div>
       </div>
 
         <?php
-        /*
-        if (isset($_POST["question"])){
-
-          $questionID=rand(0,9999999);
-          $sql = "INSERT INTO Question (q_id,s_id,username,question_content)
-          VALUES (" .$questionID. ",'" .$_SESSION["sessionID"]. "','"
-          .$_SESSION["username"]. "','" .$_POST["question"]. "')";
-
-          if ($conn->query($sql) === TRUE) {
-              echo "New record created successfully";
-              header('Location: '.$_SERVER['REQUEST_URI']);
-               
-          } else {
-              echo "Error: " .$sql. "<br>" .$conn->error;
-          }
-        }
-        */
-
         $sql = "SELECT * FROM Question WHERE (s_id = '" .$_SESSION["sessionID"]. "') ORDER BY t_stamp DESC";
         $result = $conn->query($sql);
         ?>
@@ -93,8 +63,8 @@
               <td>".$row['t_stamp']."</td>
               <td>".$row['question_content']."</td>
               <td>".$row['answer_content']."</td>
-              <td> <button type='button'>Delete</button></td>
             </tr>";
+          
         }
 
         $conn->close();
