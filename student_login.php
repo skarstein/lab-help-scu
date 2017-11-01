@@ -77,7 +77,7 @@
                 $_SESSION["sessionID"] = $sessionID;
                 $_SESSION["userType"] = "ST";
                  
-                header('Location: http://students.engr.scu.edu/~skarstei/student.php');
+                header('Location: student.php');
                 exit();
             }
         }
