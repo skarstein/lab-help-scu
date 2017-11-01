@@ -40,97 +40,88 @@
           <label for="classNameInput">Class Name</label>
           <input type="text" class="form-control" name="classNameInput" placeholder="Class Name">
         </div>
-
-        <!-- <div class="form-group">
-          <label for="exampleInputFile">File input</label>
-          <input type="file" id="exampleInputFile">
-          <p class="help-block">Example block-level help text here.</p>
-        </div> -->
-<!--         <div class="checkbox">
-          <label>
-            <input type="checkbox"> Check me out
-          </label>
-        </div> -->
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <p id = "p"></p>  
     </div>
 
     <?php
-        if (isset($_POST["usernameInput"], $_POST["passwordInput"], $_POST["ta_action"])) {
+        if (!empty($_POST["usernameInput"]) && !empty($_POST["passwordInput"]) && !empty($_POST["ta_action"]) && (!empty($_POST["classNameInput"]) || !empty($_POST["sessionIdInput"]))) {
+            $allSet = true;
             $valid = false;
             $username = $_POST["usernameInput"];
             $action = $_POST["ta_action"];
             if ($action == "Join"){
-                //echo "in join";
-        	    if (isset($_POST["sessionIdInput"])) {
+        	    //if (isset($_POST["sessionIdInput"])) {
                     $sessionID = $_POST["sessionIdInput"];    
-	    	    } else {
-		            echo ("Please Enter a Session Key");
-		            exit();		
-		        }
+	    	    //} else {
+		    //        echo ("Please Enter a Session Key");
+                    //$allSet = false;
+                    //exit();		
+		    //    }
             } else {
-         	    if (isset($_POST["classNameInput"])) {
-		            $className = $_POST["classNameInput"]; 
+                echo "Create picked";        
+         	    $className = $_POST["classNameInput"]; 
                     $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
                     $sessionID = '';
                     $max = strlen($characters) - 1;
                     for ($i = 0; $i < 10; $i++) {
                 	    $sessionID .= $characters[mt_rand(0, $max)];
-                    }
-            	} else {
-		            echo "Please Enter a Class Name";
-		            exit();
-                }
-            } 
-            $password = $_POST["passwordInput"];
-            $sql = "SELECT * FROM User WHERE username = '" .$username. "'";
-            $result = $conn->query($sql);
-	
-
-            if ($result->num_rows != 1){
-                echo "Username Not Found\n";
-            } else {
-                if ($result->fetch_assoc()["type"] == "TA") {
-		    mysqli_data_seek($result,0);
-	                if ($result->fetch_assoc()["password"] == $password){
-		                if ($action == "Join"){
-			                $sql = "SELECT * FROM Session WHERE s_id = '" .$sessionID. "'";
-                            $result = $conn->query($sql);
-                            if ($result->num_rows == 1){
-		                        session_start();
-                                $valid = true;
-                                $_SESSION["className"] = $result->fetch_assoc()["class_name"];
-                            } else {                            
-				                echo "Session Not Found";
-	                        }    
-    			        } else {
-			                $sql = "INSERT INTO Session (s_id,class_name) VALUES ('" .$sessionID. "','" .$className. "')";
-			                if ($conn->query($sql) === TRUE) {
-				                echo "New record created successfully";
-                         	    session_start();
-			    	            $valid = true;
-			                    $_SESSION["className"] = $className;
-                            } else {
-				                echo "Error Creating Record";
-			                }
-                        }    
-                    } else {
-                        echo "Password Incorrect";
-                    } 
+                }      
+            }
+            //if ($allSet){ 
+                $password = $_POST["passwordInput"];
+                $sql = "SELECT * FROM User WHERE username = '" .$username. "'";
+                $result = $conn->query($sql);
+    	
+    
+                if ($result->num_rows != 1){
+                    echo "Username Not Found\n";
                 } else {
-                    echo "This login form is for ta's only";
+                    if ($result->fetch_assoc()["type"] == "TA") {
+    		            mysqli_data_seek($result,0);
+    	                if ($result->fetch_assoc()["password"] == $password){
+    		                mysqli_data_seek($result,0);
+    		                if ($action == "Join"){
+    			                $sql = "SELECT * FROM Session WHERE s_id = '" .$sessionID. "'";
+                                $result = $conn->query($sql);
+                                if ($result->num_rows == 1){
+    		                        session_start();
+                                    $valid = true;
+                                    $_SESSION["className"] = $result->fetch_assoc()["class_name"];
+                                } else {                            
+    				                echo "Session Not Found";
+    	                        }    
+        			        } else {
+    			                $sql = "INSERT INTO Session (s_id,class_name) VALUES ('" .$sessionID. "','" .$className. "')";
+    			                if ($conn->query($sql) === TRUE) {
+    				                echo "New record created successfully";
+                             	    session_start();
+    			    	            $valid = true;
+    			                    $_SESSION["className"] = $className;
+                                } else {
+    				                echo "Error Creating Record";
+    			                }
+                            }    
+                        } else {
+                            echo "Password Incorrect";
+                        } 
+                    } else {
+                        echo "This login form is for ta's only";
+                    }
                 }
-            }
-            if ($valid){
-                $_SESSION["username"] = $username;
-                $_SESSION["sessionID"] = $sessionID;
-                $_SESSION["userType"] = "TA";
-                header('Location: http://students.engr.scu.edu/~skarstei/ta.php');
-                exit();
-            }
+                if ($valid){
+                    $_SESSION["username"] = $username;
+                    $_SESSION["sessionID"] = $sessionID;
+                    $_SESSION["userType"] = "TA";
+                    header('Location: http://students.engr.scu.edu/~skarstei/ta.php');
+                    exit();
+                }
+            //}
+        } else {
+            echo "Please Fill In Every Box";
         }
-    ?>
+?>
 
 
     <script type="text/javascript" src="assets/js/ta_login_js.js"></script>
