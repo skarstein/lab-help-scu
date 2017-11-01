@@ -3,15 +3,14 @@
 <html>
   <title>Create Account</title>
 
-  <?php require './db_php/connect.php';?>
-  <?php include './partials/head.php';?>
+  <?php require './partials/head.php';?>
 
   <body>
 
-    <div class="container">
+    <div class="container main">
       <div class="row">
-        <div class="col">
-          <h1>Create a New Account</h1>
+        <div class="col-sm-12 col-md-7 mx-auto">
+          <h1 class="mx-auto">Create a New Account</h1>
           <form action="" method="POST">
             <div class="form-check form-check-inline">
               <label class="form-check-label">

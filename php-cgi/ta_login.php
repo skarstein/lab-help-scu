@@ -2,12 +2,11 @@
 
 <html>
 
-    <?php require './db_php/connect.php';?>
-    <?php include './partials/head.php';?>
+  <?php require './partials/head.php';?>
 
   <body>
 
-    <div class="container">
+    <div class="container main">
       <div class="row">
         <div class="col">
           <h1>TA Help Seeking System</h1>
@@ -40,7 +39,7 @@
           <label for="classNameInput">Class Name</label>
           <input type="text" class="form-control" name="classNameInput" placeholder="Class Name">
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
       </form>
       <p id = "p"></p>  
     </div>
