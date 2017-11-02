@@ -36,8 +36,6 @@
 
             $valid = false;
             
-            $sql = "SELECT * from User WHERE username = 'sean'";
-            $result = $conn->query($sql);
             $username = $_POST["usernameInput"];
             $sessionID = $_POST["sessionIdInput"];
             $password = $_POST["passwordInput"];
@@ -49,9 +47,16 @@
                 echo "Username Not Found\n";
             } else {
                 if ($result->fetch_assoc()["type"] == "ST") {
+    		    mysqli_data_seek($result,0);
+                    $salt = $result->fetch_assoc()["salt"];
+                    $options = [
+                        'salt' => $salt,
+                    ];
+                    //generate hashed password
+                    $hashed = password_hash($password,  PASSWORD_BCRYPT, $options);
+    		    mysqli_data_seek($result,0);
+                    if ($result->fetch_assoc()["password"] == $hashed){
     		        mysqli_data_seek($result,0);
-                    if ($result->fetch_assoc()["password"] == $password){
-    		            mysqli_data_seek($result,0);
                         $sql = "SELECT * FROM Session WHERE s_id = '" .$sessionID. "'";
                         $result = $conn->query($sql);
                     

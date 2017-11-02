@@ -59,7 +59,6 @@
                     //exit();		
 		    //    }
             } else {
-                echo "Create picked";        
          	    $className = $_POST["classNameInput"]; 
                     $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
                     $sessionID = '';
@@ -78,8 +77,18 @@
                     echo "Username Not Found\n";
                 } else {
                     if ($result->fetch_assoc()["type"] == "TA") {
-    		            mysqli_data_seek($result,0);
-    	                if ($result->fetch_assoc()["password"] == $password){
+    		        mysqli_data_seek($result,0);
+                        $salt = $result->fetch_assoc()["salt"];
+                        $options = [
+                                'salt' => $salt,
+                        ];
+                        //generate hashed password
+                        $hashed = password_hash($password,  PASSWORD_BCRYPT, $options);
+                        echo "hashed is: " .$hashed. "<br>";
+                        mysqli_data_seek($result,0);
+                        echo "password is: " .$result->fetch_assoc()["password"]. "<br>";
+                        mysqli_data_seek($result,0);
+    	                if ($result->fetch_assoc()["password"] == $hashed){
     		                mysqli_data_seek($result,0);
     		                if ($action == "Join"){
     			                $sql = "SELECT * FROM Session WHERE s_id = '" .$sessionID. "'";
