@@ -49,7 +49,6 @@
         <thead>
           <tr>
             <th>Question ID</th>
-            <th>Session ID</th>
             <th>Asker</th>
             <th>Time</th>
             <th>Question</th>
@@ -62,7 +61,6 @@
           echo 
             "<tr>
               <td>".$row['q_id']."</td>
-              <td>".$row['s_id']."</td>
               <td>".$row['username']."</td>
               <td>".$row['t_stamp']."</td>
               <td>".$row['question_content']."</td>
