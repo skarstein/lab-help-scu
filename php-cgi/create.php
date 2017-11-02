@@ -11,7 +11,7 @@
       <div class="row">
         <div class="col-sm-12 col-md-7 mx-auto">
           <h1 class="mx-auto">Create a New Account</h1>
-          <form action="" method="POST">
+          <form id="create_account_form" action="" method="POST">
             <div class="form-check form-check-inline">
               <label class="form-check-label">
                 <input class="form-check-input" type="radio" name="student_type" value="ST" checked="checked"> Student
@@ -24,22 +24,22 @@
             </div>
             <div class="form-group">
               <label for="username">Username:</label>
-              <input type="text" class="form-control" name="username" placeholder="Username"/>  
+              <input type="text" class="form-control" name="username" placeholder="Username"/> 
+              <div class="invalid" id="invalid-usernameempty"></div>
             </div>
             <div class="form-group">
               <label for="password">Password:</label>
-              <input type="password" class="form-control" name="password" placeholder="Password"/>
+              <input type="password" class="form-control" id="password" name="password" placeholder="Password"/>
             </div>
             <div class="form-group">
               <label for="confpassword">Confirm Password:</label>
               <input type="password" class="form-control" name="confpassword" placeholder="Retype Password"/>
             </div>
-
             <div id="tacred_form" class="form-group" style="display:none">
               <label for="tacred">TA Credential:</label>
               <input type="password" class="form-control" name="tacred" placeholder="TA Credential"/>
             </div>
-            <button type="submit" class="btn btn-primary">Create Account</button>
+            <button id="#create_submit" type="submit" class="btn btn-primary">Create Account</button>
           </form>
         </div>
       </div>
@@ -59,8 +59,8 @@
               $sql = "INSERT INTO User VALUES ('" .$_POST["username"]. "','" .$_POST["password"]. "','" .$_POST["student_type"]. "')";
               $validated = true;
             }
-            $message = "TA Credential Incorrect.";
-            echo $message;
+            $message = "'TA Credential Incorrect.'";
+            echo "<script>showError($message)</script>";
           }
           else {
             $sql = "INSERT INTO User VALUES ('" .$_POST["username"]. "','" .$_POST["password"]. "','" .$_POST["student_type"]. "')";
@@ -74,10 +74,10 @@
           header('Location: '.$_SERVER['REQUEST_URI']);   
         } 
         else {
-          echo "Error: could not create account";
+          $message = "'Error: could not create account'";
+          echo "<script>showError($message)</script>";
         }
       }
-
       $sql = "SELECT username, password, type FROM User";
       $result = $conn->query($sql);
 

@@ -3,3 +3,8 @@
 .main {
   margin-top: 40px;
 }
+
+.error {
+  font-style: italic;
+  color: rgb(220, 53, 69);
+}
