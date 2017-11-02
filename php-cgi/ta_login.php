@@ -105,8 +105,8 @@
                                     $valid = true;
                                     $_SESSION["className"] = $result->fetch_assoc()["class_name"];
                                 } else {                            
-    				                $message = "'Session Not Found'";
-                                                echo "<script>showError($message);</script>";
+    				                      $message = "'Session Not Found'";
+                                  echo "<script>showError($message);</script>";
     	                        }    
         			        } else {
     			                $sql = "INSERT INTO Session (s_id,class_name) VALUES ('" .$sessionID. "','" .$className. "')";
@@ -138,8 +138,6 @@
                 }
             //}
         } else {
-            $message = "'Please Fill In Every Box'";
-            echo "<script>showError($message);</script>";
         }
 ?>
 

@@ -11,7 +11,7 @@
       <div class="row">
         <div class="col-sm-12 col-md-7 mx-auto">
           <h1 class="form-header">TA Help Seeking System<br />Student Login</h1>
-          <form role="form" action = "student_login.php" method ="post">
+          <form role="form" id="student_login_form" action = "student_login.php" method ="post">
             <div class="form-group">
               <label for="usernameInput">Username</label>
               <input type="text" class="form-control" name="usernameInput" placeholder="Enter Username">
@@ -33,6 +33,7 @@
       <?php require './partials/footer.php';?>
     </div>
 
+    <script src="assets/js/student_login_js.js"></script>
     <?php
         if (!empty($_POST["usernameInput"]) && !empty($_POST["passwordInput"]) && !empty($_POST["sessionIdInput"])) {
             session_start();
@@ -47,7 +48,8 @@
             $result = $conn->query($sql);
     
             if ($result->num_rows != 1){
-                echo "Username Not Found\n";
+                $message = "'Username Not Found'";
+                echo "<script>showError($message);</script>";
             } else {
                 if ($result->fetch_assoc()["type"] == "ST") {
     		    mysqli_data_seek($result,0);
@@ -64,17 +66,19 @@
                         $result = $conn->query($sql);
                     
                         if ($result->num_rows == 1){
-                            echo "SUCESS";
                             $valid = true;
                             $_SESSION["className"] = $result->fetch_assoc()["class_name"];
                         } else {
-                            echo "Session Not Found";
+                            $message = "'Session Not Found'";
+                            echo "<script>showError($message);</script>";
                         }
                     } else {
-                        echo "Password Incorrect";
+                        $message = "'Password Incorrect'";
+                        echo "<script>showError($message);</script>";
                     } 
                 } else {
-                    echo "This login form is for students only";
+                    $message = "'This login form is for students only'";
+                    echo "<script>showError($message);</script>";
                 }
             }
           

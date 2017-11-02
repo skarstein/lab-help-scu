@@ -28,8 +28,8 @@ $(document).ready(function(){
     $("#ta_login_form").validate({
         focusCleanup: true,
         rules: {
-	   usernameInput: "required",
-           passwordInput: "required"
+            usernameInput: "required",
+            passwordInput: "required"
         }
     });
    

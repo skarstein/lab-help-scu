@@ -106,15 +106,9 @@
         header('Location: create.php?success=true');
       } 
       else {
-        $message = "'Error: could not create account'";
+        $message = "'User already exists.'";
         echo "<script>showError($message);</script>";
       }
-    }
-    $sql = "SELECT username, password, type FROM User";
-    $result = $conn->query($sql);
-
-    while($row = $result->fetch_assoc()){
-        echo "<br> username: ".$row['username']." ".$row['password']."<br>"." ".$row['type']."<br>";
     }
 
     $conn->close();
