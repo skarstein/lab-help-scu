@@ -7,15 +7,15 @@
 
   <?php
     session_start();
-    //$_SESSION["className"]="Coen174L";
-    //$_SESSION["sessionID"]="123456";
-    //$_SESSION["userType"]="st";
-    //$_SESSION["username"]="sean";
     if (! isset($_SESSION["username"])){
-       header('Location: http://students.engr.scu.edu/~'.$DEV_WEB_HOME.'/student_login.php'); 
+       header('Location: http://students.engr.scu.edu/~'.$DEV_WEB_HOME.'/php-cgi/student_login.php'); 
     }
     if ($_SESSION["userType"]=="TA"){
         header('Location: ta.php');
+    }
+    if(! empty($_POST["logout"])){
+        session_destroy();
+        header('Location: student_login.php');
     }
   ?>
 
@@ -27,6 +27,7 @@
         <?php 
         echo "your username is: " .$_SESSION["username"]. "<br>";
         echo "your class name is: " .$_SESSION["className"]. "<br>";
+        echo "your session ID is: " .$_SESSION["sessionID"]. "<br>";
         ?>
       </h1>
     </div>
@@ -41,6 +42,11 @@
               <input type="submit" value="Submit">
             </div>
           </form>
+          <form action="" method="POST">
+            <div class="form-group">
+              <input type="submit" name="logout" value="logout">
+            </div>
+          </form>
         </div>
       </div>
 
@@ -49,7 +55,7 @@
 
           $questionID=rand(0,9999999);
           $question = $_POST["question"];
-          $question = strip_tags$question);
+          $question = strip_tags($question);
           $sql = "INSERT INTO Question (q_id,s_id,username,question_content)
           VALUES (" .$questionID. ",'" .$_SESSION["sessionID"]. "','"
           .$_SESSION["username"]. "','" .$question. "')";
@@ -71,8 +77,6 @@
       <table class="table">
         <thead>
           <tr>
-            <th>Question ID</th>
-            <th>Session ID</th>
             <th>Time</th>
             <th>Question</th>
             <th>Answer</th>
@@ -83,8 +87,6 @@
         while($row = $result->fetch_assoc()){
           echo 
             "<tr>
-              <td>".$row['q_id']."</td>
-              <td>".$row['s_id']."</td>
               <td>".$row['t_stamp']."</td>
               <td>".$row['question_content']."</td>
               <td>".$row['answer_content']."</td>

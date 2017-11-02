@@ -7,12 +7,8 @@
 
   <?php
     session_start();
-    //$_SESSION["className"]="Coen174L";
-    //$_SESSION["sessionID"]="123456";
-    //$_SESSION["userType"]="ta";
-    //$_SESSION["username"]="sean";
     if (! isset($_SESSION["username"])){
-       header('Location: http://students.engr.scu.edu/'.$DEV_WEB_HOME.'/ta_login.php'); 
+       header('Location: http://students.engr.scu.edu/~'.$DEV_WEB_HOME.'/php-cgi/ta_login.php'); 
     }
     if ($_SESSION["userType"]=="ST"){
       header('Location: student.php');
