@@ -25,17 +25,19 @@
   <body>
 
     <div class="container main">
-    <div class="page-header">
-      <h1>
-        <?php 
-        echo "your username is: " .$_SESSION["username"]. "<br>";
-        echo "your class name is: " .$_SESSION["className"]. "<br>";
-        echo "your session ID is: " .$_SESSION["sessionID"]. "<br>";
-        ?>
-      </h1>
-    </div>
       <div class="row">
-        <div class="col">
+        <div class="home-top col-12 col-md-5 center">
+          <h1>
+            <?php 
+            echo "Username: " .$_SESSION["username"]. "<br>";
+            echo "Class Name: " .$_SESSION["className"]. "<br>";
+            echo "Session ID: " .$_SESSION["sessionID"]. "<br>";
+            ?>
+          </h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
           <form action="" method="POST">
             <div class="form-group">
               <label for="question">Question:</label>

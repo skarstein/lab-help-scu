@@ -46,3 +46,21 @@
   background: -moz-linear-gradient(#337ab7,#265a88); /* For Firefox 3.6 to 15 */
   background: linear-gradient(#337ab7,#265a88);  /* Standard syntax */
 }
+
+tr:hover {
+  background-color: #fffcd6;
+  cursor: pointer;
+}
+
+.home-top {
+  margin: auto;
+  background-color: #e9ecef;
+  padding: 18px;
+  border-radius: 6px;
+  margin-bottom: 14px;
+}
+
+.home-top h1 {
+  font-size: 24px !important;
+  margin-bottom: 0px;
+}

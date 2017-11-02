@@ -22,16 +22,18 @@
   <body>
 
     <div class="container main">
-    <div class="page-header">
-      <h1>
-        <?php 
-        echo "" .$_SESSION["className"]. " Q&A Session " .$_SESSION["sessionID"]. "<br>";
-        echo "your username is: " .$_SESSION["username"]. "<br>";
-        ?>
-      </h1>
-    </div>
       <div class="row">
-        <div class="col">
+        <div class="home-top col-12 col-md-5 center">
+          <h1>
+            <?php 
+            echo "" .$_SESSION["className"]. " Q&A Session " .$_SESSION["sessionID"]. "<br>";
+            echo "your username is: " .$_SESSION["username"]. "<br>";
+            ?>
+          </h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
           <?php
           $sql = "SELECT * FROM Question WHERE (s_id = '" .$_SESSION["sessionID"]. "') ORDER BY t_stamp DESC";
           $result = $conn->query($sql);
