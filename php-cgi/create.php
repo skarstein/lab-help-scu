@@ -57,7 +57,6 @@
           $message = "'New account created successfully'";
           echo "<script>showSuccess($message);</script>";
         }
-<<<<<<< HEAD
       }
     ?>
 
@@ -67,13 +66,12 @@
     $validated = false;
 
 
-
     if (isset($_POST["username"], $_POST["password"], $_POST["confpassword"], $_POST["student_type"])) {
       if ($_POST["password"] !== $_POST["confpassword"]) {
          $message = "Passwords do not match.";
-         echo $message;
+         echo "<script>showError($message);</script>";
       }
-      else {
+      else { 
         //Password Hashing:
         //start by generating salt
         $salt = openssl_random_pseudo_bytes(22);
@@ -83,54 +81,27 @@
         //generate hashed password
         $hashed = password_hash($_POST["password"],  PASSWORD_BCRYPT, $options);
         //heck if ta cred is filled in
+        $username = ($_POST["username"]);
         if ($_POST["tacred"] !== '') {
           //if tacred is correct, create ta account
-          if($_POST["tacred"] == "tempkey") {
+          if($_POST["tacred"] == "tempkey") {  
             //insert hashed password and salt into User table for TA
-            $sql = "INSERT INTO User VALUES ('" .$_POST["username"]. "','" .$salt. "','" .$hashed. "','" .$_POST["student_type"]. "')";
-=======
-        else {
-          //Password Hashing:
-          //start by generating salt
-          $salt = openssl_random_pseudo_bytes(22);
-          $options = [
-            'salt' => $salt,
-          ];
-          //generate hashed password
-          $hashed = password_hash($_POST["password"],  PASSWORD_BCRYPT, $options);
-          //heck if ta cred is filled in
-          $username = ($_POST["username"]);
-          if ($_POST["tacred"] !== '') {
-            //if tacred is correct, create ta account
-            if($_POST["tacred"] == "tempkey") {
-              //insert hashed password and salt into User table for TA
-              $sql = "INSERT INTO User VALUES ('" .$username. "','" .$salt. "','" .$hashed. "','" .$_POST["student_type"]. "')";
-              $validated = true;
-            }
-            $message = "TA Credential Incorrect.";
-            echo $message;
-          }
-          //if tacred is blank, create student accoutn:
-          else {
-            //insert hashed password and salt into User table for student
-            $sql = "INSERT INTO User VALUES ('" .$username. "','" .$salt. "','" .$hashed. "','" .$_POST["student_type"]. "')";
->>>>>>> 442f9cc4fd9d91cbe1d6bb53c0d09eb03114dc96
             $validated = true;
           }
           else {
-            $message = "'TA Credential Incorrect.'";
+            $message = "TA Credential Incorrect.";
             echo "<script>showError($message);</script>";
           }
         }
-        //if tacred is blank, create student accoutn
+        //if tacred is blank, create student accoutn:
         else {
           //insert hashed password and salt into User table for student
-          $sql = "INSERT INTO User VALUES ('" .$_POST["username"]. "','" .$salt. "','" .$hashed. "','" .$_POST["student_type"]. "')";
           $validated = true;
         }
       }
     }
     if ($validated) {
+      $sql = "INSERT INTO User VALUES ('" .$username. "','" .$salt. "','" .$hashed. "','" .$_POST["student_type"]. "')";
       if ($conn->query($sql) === TRUE) {
         header('Location: create.php?success=true');
       } 
