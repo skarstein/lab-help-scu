@@ -54,9 +54,10 @@
           $questionID=rand(0,9999999);
           $question = $_POST["question"];
           $question = strip_tags($question);
+          $question = str_replace('"', "'", $question);
           $sql = "INSERT INTO Question (q_id,s_id,username,question_content)
-          VALUES (" .$questionID. ",'" .$_SESSION["sessionID"]. "','"
-          .$_SESSION["username"]. "','" .$question. "')";
+          VALUES (" .$questionID. ",\"" .$_SESSION["sessionID"]. "\",\""
+          .$_SESSION["username"]. "\",\"" .$question. "\")";
 
           if ($conn->query($sql) === TRUE) {
               echo "New record created successfully";
