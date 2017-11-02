@@ -63,11 +63,12 @@
           //generate hashed password
           $hashed = password_hash($_POST["password"],  PASSWORD_BCRYPT, $options);
           //heck if ta cred is filled in
+          $username = ($_POST["username"]);
           if ($_POST["tacred"] !== '') {
             //if tacred is correct, create ta account
             if($_POST["tacred"] == "tempkey") {
               //insert hashed password and salt into User table for TA
-              $sql = "INSERT INTO User VALUES ('" .$_POST["username"]. "','" .$salt. "','" .$hashed. "','" .$_POST["student_type"]. "')";
+              $sql = "INSERT INTO User VALUES ('" .$username. "','" .$salt. "','" .$hashed. "','" .$_POST["student_type"]. "')";
               $validated = true;
             }
             $message = "TA Credential Incorrect.";
@@ -76,7 +77,7 @@
           //if tacred is blank, create student accoutn:
           else {
             //insert hashed password and salt into User table for student
-            $sql = "INSERT INTO User VALUES ('" .$_POST["username"]. "','" .$salt. "','" .$hashed. "','" .$_POST["student_type"]. "')";
+            $sql = "INSERT INTO User VALUES ('" .$username. "','" .$salt. "','" .$hashed. "','" .$_POST["student_type"]. "')";
             $validated = true;
           }
         }

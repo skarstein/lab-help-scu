@@ -49,7 +49,7 @@
 
           $questionID=rand(0,9999999);
           $question = $_POST["question"];
-          $question = strip_tags($question);
+          $question = strip_tags$question);
           $sql = "INSERT INTO Question (q_id,s_id,username,question_content)
           VALUES (" .$questionID. ",'" .$_SESSION["sessionID"]. "','"
           .$_SESSION["username"]. "','" .$question. "')";

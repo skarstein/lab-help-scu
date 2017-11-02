@@ -45,6 +45,7 @@
     </div>
 
     <?php
+
         if (!empty($_POST["usernameInput"]) && !empty($_POST["passwordInput"]) && !empty($_POST["ta_action"]) && (!empty($_POST["classNameInput"]) || !empty($_POST["sessionIdInput"]))) {
             $allSet = true;
             $valid = false;
