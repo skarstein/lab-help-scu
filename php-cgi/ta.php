@@ -1,7 +1,7 @@
 <!doctype html>
 
 <html>
-  <title>TA page</title>
+  <title>TA Help Seeking System | TA Questions</title>
 
   <?php require './partials/head.php';?>
 
@@ -67,6 +67,7 @@
         ?>
         </tbody>
       </table>
+      <?php require './partials/footer.php';?>
     </div>
   </body>
 </html>

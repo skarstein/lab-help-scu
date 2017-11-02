@@ -1,6 +1,9 @@
 <!doctype html>
 
 <html>
+
+  <title>TA Help Seeking System | Student Home</title>
+
   <title>Student page</title>
 
   <?php require './partials/head.php';?>
@@ -98,6 +101,7 @@
         ?>
         </tbody>
       </table>
+      <?php require './partials/footer.php';?>
     </div>
   </body>
 </html>
