@@ -1,5 +1,11 @@
 /* custom.ccs defines overall styling for the entire application. */
 
+@import url('https://fonts.googleapis.com/css?family=PT+Sans|Open+Sans|Roboto');
+
+* {
+  font-family: 'Roboto', 'Helvetica', sans-serif;
+}
+
 .main {
   margin-top: 40px;
 }

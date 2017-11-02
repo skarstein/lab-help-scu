@@ -32,42 +32,42 @@
     </div>
       <div class="row">
         <div class="col">
+          <?php
+          $sql = "SELECT * FROM Question WHERE (s_id = '" .$_SESSION["sessionID"]. "') ORDER BY t_stamp DESC";
+          $result = $conn->query($sql);
+          ?>
 
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Time</th>
+                <th>Question</th>
+                <th>Answer</th>
+              </tr>
+            </thead>
+            <tbody>
+            <?php
+            while($row = $result->fetch_assoc()){
+              echo 
+                "<tr>
+                  <td>".$row['username']."</td>
+                  <td>".$row['t_stamp']."</td>
+                  <td>".$row['question_content']."</td>
+                  <td>".$row['answer_content']."</td>
+                </tr>";
+              
+            }
+
+            $conn->close();
+             
+            ?>
+            </tbody>
+          </table>
         </div>
       </div>
 
-        <?php
-        $sql = "SELECT * FROM Question WHERE (s_id = '" .$_SESSION["sessionID"]. "') ORDER BY t_stamp DESC";
-        $result = $conn->query($sql);
-        ?>
 
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Student</th>
-            <th>Time</th>
-            <th>Question</th>
-            <th>Answer</th>
-          </tr>
-        </thead>
-        <tbody>
-        <?php
-        while($row = $result->fetch_assoc()){
-          echo 
-            "<tr>
-              <td>".$row['username']."</td>
-              <td>".$row['t_stamp']."</td>
-              <td>".$row['question_content']."</td>
-              <td>".$row['answer_content']."</td>
-            </tr>";
-          
-        }
-
-        $conn->close();
-         
-        ?>
-        </tbody>
-      </table>
       <?php require './partials/footer.php';?>
       <form action="" method="POST">
         <div class="form-group" style="text-align:center;">
