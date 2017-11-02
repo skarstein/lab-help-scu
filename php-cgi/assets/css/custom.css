@@ -24,9 +24,19 @@
 
 .footer {
   margin-top: 40px;
+  margin-bottom: 14px;
   text-align: center;
 }
 
 .footer > p {
   margin-bottom: 0px;
+}
+
+.btn-primary {
+  border-color: #2e6da4;
+  background: #337ab7; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(#337ab7,#265a88); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#337ab7,#265a88); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#337ab7,#265a88); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#337ab7,#265a88);  /* Standard syntax */
 }

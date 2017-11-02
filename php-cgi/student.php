@@ -39,15 +39,10 @@
           <form action="" method="POST">
             <div class="form-group">
               <label for="question">Question:</label>
-              <input type="text" class="form-control" name="question" placeholder="Question"/>
+              <textarea type="text" class="form-control" name="question" placeholder="Question"/></textarea>
             </div>
             <div class="form-group">
-              <input type="submit" value="Submit">
-            </div>
-          </form>
-          <form action="" method="POST">
-            <div class="form-group">
-              <input type="submit" name="logout" value="logout">
+              <button class="btn btn-primary" type="submit" value="Submit">Submit</button>
             </div>
           </form>
         </div>
@@ -102,6 +97,11 @@
         </tbody>
       </table>
       <?php require './partials/footer.php';?>
+      <form action="" method="POST">
+        <div class="form-group" style="text-align:center;">
+          <button class="btn btn-primary" type="submit" name="logout" value="logout">Logout</button>
+        </div>
+      </form>
     </div>
   </body>
 </html>

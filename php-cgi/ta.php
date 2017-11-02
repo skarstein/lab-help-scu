@@ -32,11 +32,7 @@
     </div>
       <div class="row">
         <div class="col">
-          <form action="" method="POST">
-            <div class="form-group">
-              <input type="submit" name="logout" value="logout">
-            </div>
-          </form>
+
         </div>
       </div>
 
@@ -77,6 +73,11 @@
         </tbody>
       </table>
       <?php require './partials/footer.php';?>
+      <form action="" method="POST">
+        <div class="form-group" style="text-align:center;">
+          <button class="btn btn-primary" type="submit" name="logout" value="logout">Logout</button>
+        </div>
+      </form>
     </div>
   </body>
 </html>
