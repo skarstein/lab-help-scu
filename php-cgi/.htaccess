@@ -1,6 +1,2 @@
 AddType application/php-cgi .php
-<<<<<<< HEAD
 Action application/php-cgi /~blee/cgi-bin/php-cgi.cgi
-=======
-Action application/php-cgi /~ngoodpas/cgi-bin/php-cgi.cgi
->>>>>>> 442f9cc4fd9d91cbe1d6bb53c0d09eb03114dc96
