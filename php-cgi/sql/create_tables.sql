@@ -1,5 +1,6 @@
 CREATE TABLE User(
     username varchar(20),
+    salt varchar(40),
     password varchar(40),
     type char(2), CHECK (type IN ('ST','TA')),
     PRIMARY KEY (username)

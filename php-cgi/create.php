@@ -54,16 +54,28 @@
            echo $message;
         }
         else {
+          //if tacred is blank, create student account
+          //Password Hashing:
+          //start by generating salt
+          $salt = openssl_random_pseudo_bytes(22);
+          $options = [
+            'salt' => $salt,
+          ];
+          //generate hashed password
+          $hashed = password_hash($_POST["password"],  PASSWORD_BCRYPT, $options);
+          echo "<br>" .$hashed. "<br>";
           if ($_POST["tacred"] !== '') {
+            //if tacred is correct, create ta account
             if($_POST["tacred"] == "tempkey") {
-              $sql = "INSERT INTO User VALUES ('" .$_POST["username"]. "','" .$_POST["password"]. "','" .$_POST["student_type"]. "')";
+              //insert hashed password and salt into User table
+              $sql = "INSERT INTO User VALUES ('" .$_POST["username"]. "','" .$hashed. "','" .$_POST["student_type"]. "','" .$salt. "')";
               $validated = true;
             }
             $message = "'TA Credential Incorrect.'";
             echo "<script>showError($message)</script>";
           }
           else {
-            $sql = "INSERT INTO User VALUES ('" .$_POST["username"]. "','" .$_POST["password"]. "','" .$_POST["student_type"]. "')";
+            $sql = "INSERT INTO User VALUES ('" .$_POST["username"]. "','" .$hashed. "','" .$_POST["student_type"]. "','" .$salt. "')";
             $validated = true;
           }
         }
