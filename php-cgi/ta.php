@@ -13,6 +13,10 @@
     if ($_SESSION["userType"]=="ST"){
       header('Location: student.php');
     }
+    if(! empty($_POST["logout"])){
+        session_destroy();
+        header('Location: ta_login.php');
+    }
   ?>
 
   <body>
@@ -28,6 +32,11 @@
     </div>
       <div class="row">
         <div class="col">
+          <form action="" method="POST">
+            <div class="form-group">
+              <input type="submit" name="logout" value="logout">
+            </div>
+          </form>
         </div>
       </div>
 
