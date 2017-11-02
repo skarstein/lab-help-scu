@@ -1,6 +1,7 @@
 <!doctype html>
 
 <html>
+  <title>TA Help Seeking System | Student Login</title>
 
   <?php require './partials/head.php';?>
 
@@ -8,26 +9,28 @@
 
     <div class="container main">
       <div class="row">
-        <div class="col">
-          <h1>TA Help Seeking System</h1>
+        <div class="col-sm-12 col-md-7 mx-auto">
+          <h1 class="form-header">TA Help Seeking System<br />Student Login</h1>
+          <form role="form" action = "student_login.php" method ="post">
+            <div class="form-group">
+              <label for="usernameInput">Username</label>
+              <input type="text" class="form-control" name="usernameInput" placeholder="Enter Username">
+            </div>
+            <div class="form-group">
+              <label for="passwordInput">Password</label>
+              <input type="password" class="form-control" name="passwordInput" placeholder="Password">
+            </div>
+            <div class="form-group">
+              <label for="sessionIdInput">Session ID</label>
+              <input type="password" class="form-control" name="sessionIdInput" placeholder="Session Id">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
         </div>
       </div>
-      <form role="form" action = "student_login.php" method ="post">
-        <div class="form-group">
-          <label for="usernameInput">Username</label>
-          <input type="text" class="form-control" name="usernameInput" placeholder="Enter Username">
-        </div>
-        <div class="form-group">
-          <label for="passwordInput">Password</label>
-          <input type="password" class="form-control" name="passwordInput" placeholder="Password">
-        </div>
-        <div class="form-group">
-          <label for="sessionIdInput">Session Id</label>
-          <input type="password" class="form-control" name="sessionIdInput" placeholder="Session Id">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-      <p id = "p"></p>  
+    
+      <p id = "p"></p>
+      <?php require './partials/footer.php';?>
     </div>
 
     <?php
