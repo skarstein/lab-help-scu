@@ -44,8 +44,7 @@
       <table class="table">
         <thead>
           <tr>
-            <th>Question ID</th>
-            <th>Asker</th>
+            <th>Student</th>
             <th>Time</th>
             <th>Question</th>
             <th>Answer</th>
@@ -56,7 +55,6 @@
         while($row = $result->fetch_assoc()){
           echo 
             "<tr>
-              <td>".$row['q_id']."</td>
               <td>".$row['username']."</td>
               <td>".$row['t_stamp']."</td>
               <td>".$row['question_content']."</td>
