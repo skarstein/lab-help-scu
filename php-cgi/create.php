@@ -1,7 +1,8 @@
 <!doctype html>
 
 <html>
-  <title>Create Account</title>
+
+  <title>TA Help Seeking System | Create Account</title>
 
   <?php require './partials/head.php';?>
 
@@ -10,7 +11,7 @@
     <div class="container main">
       <div class="row">
         <div class="col-sm-12 col-md-7 mx-auto">
-          <h1 class="mx-auto">Create a New Account</h1>
+          <h1 class="form-header">Create a New Account</h1>
           <form id="create_account_form" action="" method="POST">
             <div class="form-check form-check-inline">
               <label class="form-check-label">
@@ -39,68 +40,85 @@
               <label for="tacred">TA Credential:</label>
               <input type="password" class="form-control" name="tacred" placeholder="TA Credential"/>
             </div>
-            <button id="#create_submit" type="submit" class="btn btn-primary">Create Account</button>
+            <button id="#create_submit" type="submit" class="btn btn-primary center">Create Account</button>
           </form>
         </div>
       </div>
+      <?php require './partials/footer.php';?>
     </div>
 
-      <?php
 
-      $validated = false;
-      if (isset($_POST["username"], $_POST["password"], $_POST["confpassword"], $_POST["student_type"])) {
-        if ($_POST["password"] !== $_POST["confpassword"]) {
-           $message = "Passwords do not match.";
-           echo $message;
+    <script type="text/javascript" src="assets/js/create_js.js"></script>
+
+    <?php 
+      if(isset($_GET['success'])){
+        $status = $_GET['success'];
+        if($status == 'true') {
+          $message = "'New account created successfully'";
+          echo "<script>showSuccess($message);</script>";
         }
-        else {
-          //Password Hashing:
-          //start by generating salt
-          $salt = openssl_random_pseudo_bytes(22);
-          $options = [
-            'salt' => $salt,
-          ];
-          //generate hashed password
-          $hashed = password_hash($_POST["password"],  PASSWORD_BCRYPT, $options);
-          //heck if ta cred is filled in
-          if ($_POST["tacred"] !== '') {
-            //if tacred is correct, create ta account
-            if($_POST["tacred"] == "tempkey") {
-              //insert hashed password and salt into User table for TA
-              $sql = "INSERT INTO User VALUES ('" .$_POST["username"]. "','" .$salt. "','" .$hashed. "','" .$_POST["student_type"]. "')";
-              $validated = true;
-            }
-            $message = "'TA Credential Incorrect.'";
-            echo "<script>showError($message)</script>";
-          }
-          //if tacred is blank, create student accoutn:
-          else {
-            //insert hashed password and salt into User table for student
+      }
+    ?>
+
+
+    <?php
+
+    $validated = false;
+
+
+
+    if (isset($_POST["username"], $_POST["password"], $_POST["confpassword"], $_POST["student_type"])) {
+      if ($_POST["password"] !== $_POST["confpassword"]) {
+         $message = "Passwords do not match.";
+         echo $message;
+      }
+      else {
+        //Password Hashing:
+        //start by generating salt
+        $salt = openssl_random_pseudo_bytes(22);
+        $options = [
+          'salt' => $salt,
+        ];
+        //generate hashed password
+        $hashed = password_hash($_POST["password"],  PASSWORD_BCRYPT, $options);
+        //heck if ta cred is filled in
+        if ($_POST["tacred"] !== '') {
+          //if tacred is correct, create ta account
+          if($_POST["tacred"] == "tempkey") {
+            //insert hashed password and salt into User table for TA
             $sql = "INSERT INTO User VALUES ('" .$_POST["username"]. "','" .$salt. "','" .$hashed. "','" .$_POST["student_type"]. "')";
             $validated = true;
           }
+          else {
+            $message = "'TA Credential Incorrect.'";
+            echo "<script>showError($message);</script>";
+          }
         }
-      }
-      if ($validated) {
-        if ($conn->query($sql) === TRUE) {
-          echo "New account created successfully";
-          header('Location: '.$_SERVER['REQUEST_URI']);   
-        } 
+        //if tacred is blank, create student accoutn
         else {
-          $message = "'Error: could not create account'";
-          echo "<script>showError($message)</script>";
+          //insert hashed password and salt into User table for student
+          $sql = "INSERT INTO User VALUES ('" .$_POST["username"]. "','" .$salt. "','" .$hashed. "','" .$_POST["student_type"]. "')";
+          $validated = true;
         }
       }
-      $sql = "SELECT username, password, type FROM User";
-      $result = $conn->query($sql);
-
-      while($row = $result->fetch_assoc()){
-          echo "<br> username: ".$row['username']." ".$row['password']."<br>"." ".$row['type']."<br>";
+    }
+    if ($validated) {
+      if ($conn->query($sql) === TRUE) {
+        header('Location: create.php?success=true');
+      } 
+      else {
+        $message = "'Error: could not create account'";
+        echo "<script>showError($message);</script>";
       }
+    }
+    $sql = "SELECT username, password, type FROM User";
+    $result = $conn->query($sql);
 
-      $conn->close();
-      ?>
+    while($row = $result->fetch_assoc()){
+        echo "<br> username: ".$row['username']." ".$row['password']."<br>"." ".$row['type']."<br>";
+    }
 
-    <script type="text/javascript" src="assets/js/create_js.js"></script>
+    $conn->close();
+    ?>
   </body>
 </html>

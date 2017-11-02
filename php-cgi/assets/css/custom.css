@@ -4,7 +4,29 @@
   margin-top: 40px;
 }
 
+.form-header {
+  margin-bottom: 20px; 
+  text-align: center;
+}
+
+.center {
+    margin: auto;
+}
+
+#create_submit {
+  text-align: center;
+}
+
 .error {
   font-style: italic;
   color: rgb(220, 53, 69);
+}
+
+.footer {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.footer > p {
+  margin-bottom: 0px;
 }

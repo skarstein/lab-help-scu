@@ -2,46 +2,50 @@
 
 <html>
 
+  <title>TA Help Seeking System | TA Login</title>
+
   <?php require './partials/head.php';?>
 
   <body>
 
     <div class="container main">
       <div class="row">
-        <div class="col">
-          <h1>TA Help Seeking System</h1>
+        <div class="col-sm-12 col-md-7 mx-auto">
+          <h1 class="form-header">TA Help Seeking System<br />TA Login</h1>
+          <form role="form" action = "ta_login.php" method ="post">
+            <div class="form-group">
+              <label for="usernameInput">Username</label>
+              <input type="text" class="form-control" name="usernameInput" placeholder="Enter Username">
+            </div>
+            <div class="form-group">
+              <label for="passwordInput">Password</label>
+              <input type="password" class="form-control" name="passwordInput" placeholder="Password">
+            </div>
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="ta_action" value="Create" checked="checked"> Create
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="ta_action" value="Join"> Join
+              </label>
+            </div>
+            <div id="session_form" class="form-group"style="display:none">
+              <label for="sessionIdInput">Session ID</label>
+              <input type="text" class="form-control" name="sessionIdInput" placeholder="Session Id">
+            </div>
+            <div id="classname_form" class="form-group">
+              <label for="classNameInput">Class Name</label>
+              <input type="text" class="form-control" name="classNameInput" placeholder="Class Name">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+          <p id = "p"></p>
         </div>
       </div>
-      <form role="form" action = "ta_login.php" method ="post">
-        <div class="form-group">
-          <label for="usernameInput">Username</label>
-          <input type="text" class="form-control" name="usernameInput" placeholder="Enter Username">
-        </div>
-        <div class="form-group">
-          <label for="passwordInput">Password</label>
-          <input type="password" class="form-control" name="passwordInput" placeholder="Password">
-        </div>
-        <div class="form-check form-check-inline">
-          <label class="form-check-label">
-            <input class="form-check-input" type="radio" name="ta_action" value="Create" checked="checked"> Create
-          </label>
-        </div>
-        <div class="form-check form-check-inline">
-          <label class="form-check-label">
-            <input class="form-check-input" type="radio" name="ta_action" value="Join"> Join
-          </label>
-        </div>
-        <div id="session_form" class="form-group"style="display:none">
-          <label for="sessionIdInput">Session Id</label>
-          <input type="text" class="form-control" name="sessionIdInput" placeholder="Session Id">
-        </div>
-        <div id="classname_form" class="form-group">
-          <label for="classNameInput">Class Name</label>
-          <input type="text" class="form-control" name="classNameInput" placeholder="Class Name">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-      <p id = "p"></p>  
+    
+      <?php require './partials/footer.php';?>
     </div>
 
     <?php

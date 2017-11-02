@@ -1,3 +1,17 @@
+function clearData() {
+    $("#form_popup").remove(); 
+}
+
+function showError(message) {
+    clearData();
+    $("#create_account_form").before( '<div id="form_popup" class="alert alert-danger" role="alert">' + message + '</div>');
+}
+
+function showSuccess(message) {
+    clearData();
+    $("#create_account_form").before( '<div id="form_popup" class="alert alert-success" role="alert">' + message + '</div>');
+}
+
 $(document).ready(function(){
 
     $('input[type="radio"]').click(function() {
@@ -32,12 +46,12 @@ $(document).ready(function(){
         messages: {
             username: {
                 required: "Please define a username.",
-                rangelength: "Username is not the correct length (4-20 characters max)."
+                rangelength: "Username is not the correct length (5-20 characters)."
             },
             // compound rule
             password: {
                 required: "Please define a password.",
-                rangelength: "password is not the correct length (4-40 characters max)."
+                rangelength: "password is not the correct length (5-40 characters)."
             },
             confpassword: {
                 required: "Please retype your password.",
@@ -46,9 +60,4 @@ $(document).ready(function(){
         }
     });
 
-    function showError(message) {
-        $("#form_error").remove();
-        $("#create_account_form").before( '<div id="form_error" class="alert alert-danger" role="alert">${message}</div>');
-    }
-    
 });
