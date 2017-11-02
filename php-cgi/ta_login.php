@@ -12,7 +12,7 @@
       <div class="row">
         <div class="col-sm-12 col-md-7 mx-auto">
           <h1 class="form-header">TA Help Seeking System<br />TA Login</h1>
-          <form role="form" action = "ta_login.php" method ="post">
+          <form role="form" id="ta_login_form" action = "ta_login.php" method ="post">
             <div class="form-group">
               <label for="usernameInput">Username</label>
               <input type="text" class="form-control" name="usernameInput" placeholder="Enter Username">
@@ -48,6 +48,7 @@
       <?php require './partials/footer.php';?>
     </div>
 
+    <script src="assets/js/ta_login_js.js"></script>
     <?php
 
         if (!empty($_POST["usernameInput"]) && !empty($_POST["passwordInput"]) && !empty($_POST["ta_action"]) && (!empty($_POST["classNameInput"]) || !empty($_POST["sessionIdInput"]))) {
@@ -79,7 +80,8 @@
     	
     
                 if ($result->num_rows != 1){
-                    echo "Username Not Found\n";
+                    $message = "'Username Not Found'";
+                    echo "<script>showError($message);</script>";
                 } else {
                     if ($result->fetch_assoc()["type"] == "TA") {
     		        mysqli_data_seek($result,0);
@@ -103,7 +105,8 @@
                                     $valid = true;
                                     $_SESSION["className"] = $result->fetch_assoc()["class_name"];
                                 } else {                            
-    				                echo "Session Not Found";
+    				                $message = "'Session Not Found'";
+                                                echo "<script>showError($message);</script>";
     	                        }    
         			        } else {
     			                $sql = "INSERT INTO Session (s_id,class_name) VALUES ('" .$sessionID. "','" .$className. "')";
@@ -113,14 +116,17 @@
     			    	            $valid = true;
     			                    $_SESSION["className"] = $className;
                                 } else {
-    				                echo "Error Creating Record";
+    				                $message =  "'Error Creating Record'";
+                                                echo "<script>showError($message);</script>";
     			                }
                             }    
                         } else {
-                            echo "Password Incorrect";
+                            $message = "'Password Incorrect'";
+                            echo "<script>showError($message);</script>";
                         } 
                     } else {
-                        echo "This login form is for ta's only";
+                        $message = "'This login form is for ta's only'";
+                        echo "<script>showError($message);</script>";
                     }
                 }
                 if ($valid){
@@ -132,7 +138,8 @@
                 }
             //}
         } else {
-            echo "Please Fill In Every Box";
+            $message = "'Please Fill In Every Box'";
+            echo "<script>showError($message);</script>";
         }
 ?>
 
