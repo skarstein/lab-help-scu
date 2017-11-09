@@ -32,6 +32,10 @@
           </h1>
         </div>
       </div>
+      <form>
+        <input class="btn btn-primary" type="submit" value="Refresh Questions" style="float: right;"/>
+      </form> 
+      <br>
       <div class="row">
         <div class="col-12">
           <?php

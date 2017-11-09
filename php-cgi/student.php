@@ -44,8 +44,11 @@
               <textarea type="text" class="form-control" name="question" placeholder="Question"/></textarea>
             </div>
             <div class="form-group">
-              <button class="btn btn-primary" type="submit" value="Submit">Submit</button>
+              <button class="btn btn-primary" type="submit" value="Submit" style="float: left;">Submit</button>
             </div>
+          </form>
+          <form>
+            <input class="btn btn-primary" type="submit" value="Refresh Questions" style="float: right;"/>
           </form>
         </div>
       </div>
@@ -97,7 +100,6 @@
  
         $result = $conn->query($sql);
 
-       
         echo '
       <table class="table">
         <thead>
