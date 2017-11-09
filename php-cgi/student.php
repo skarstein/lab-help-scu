@@ -71,20 +71,44 @@
         }
 
         $sql = "SELECT * FROM Question WHERE (username = '" .$_SESSION["username"]. "') 
-        AND s_id='" .$_SESSION['sessionID']. "' ORDER BY t_stamp DESC";
-        $result = $conn->query($sql);
-        ?>
+        AND s_id='" .$_SESSION['sessionID']. "' ORDER BY ";// t_stamp DESC";
 
+        
+
+        if (!empty($_GET['sort'])){// == 'time')
+            $sort = $_GET['sort']; 
+        } else {
+            $sort = "t_stamp";
+        }
+
+        if (!empty($_GET['dir'])){
+            $dir = $_GET['dir'];
+        } else {
+            $dir = "DESC";
+        }
+
+        $sql .= $sort. " " .$dir;
+
+        if ($dir == "DESC"){
+            $dir = "ASC";
+        } else {
+            $dir = "DESC";
+        }
+ 
+        $result = $conn->query($sql);
+
+       
+        echo '
       <table class="table">
         <thead>
           <tr>
-            <th>Time</th>
-            <th>Question</th>
-            <th>Answer</th>
+            <th><a href="student.php?sort=t_stamp&dir='.$dir.'">Time</th>
+            <th><a href="student.php?sort=question_content&dir='.$dir.'">Question</th>
+            <th><a href="student.php?sort=answer_content&dir='.$dir.'">Answer</th>
           </tr>
         </thead>
-        <tbody>
-        <?php
+        <tbody>';
+        
         while($row = $result->fetch_assoc()){
           echo 
             "<tr>
