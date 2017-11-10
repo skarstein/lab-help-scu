@@ -54,7 +54,7 @@
       </div>
 
         <?php
-        if (isset($_POST["question"])){
+        if (! empty($_POST["question"])){
 
           $questionID=rand(0,9999999);
           $question = $_POST["question"];
