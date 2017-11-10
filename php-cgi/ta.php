@@ -39,7 +39,7 @@
       <div class="row">
         <div class="col-12">
           <?php
-            $sql = "SELECT * FROM Question WHERE s_id='" .$_SESSION['sessionID']. "' ORDER BY ";
+            $sql = "SELECT UNIX_TIMESTAMP(t_stamp),username,question_content,answer_content FROM Question WHERE s_id='" .$_SESSION['sessionID']. "' ORDER BY ";
 
 
 
@@ -80,10 +80,11 @@
             ';
 
             while($row = $result->fetch_assoc()){
+              $date = date("g:ia m/d/y",$row['UNIX_TIMESTAMP(t_stamp)']);
               echo 
                 "<tr>
                   <td>".$row['username']."</td>
-                  <td>".$row['t_stamp']."</td>
+                  <td>".$date."</td>
                   <td>".$row['question_content']."</td>
                   <td>".$row['answer_content']."</td>
                 </tr>";

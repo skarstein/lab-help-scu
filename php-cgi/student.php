@@ -73,7 +73,7 @@
           }
         }
 
-        $sql = "SELECT * FROM Question WHERE (username = '" .$_SESSION["username"]. "') 
+        $sql = "SELECT UNIX_TIMESTAMP(t_stamp), question_content, answer_content FROM Question WHERE (username = '" .$_SESSION["username"]. "') 
         AND s_id='" .$_SESSION['sessionID']. "' ORDER BY ";// t_stamp DESC";
 
         
@@ -112,9 +112,10 @@
         <tbody>';
         
         while($row = $result->fetch_assoc()){
+          $date = date("g:ia m/d/y",$row['UNIX_TIMESTAMP(t_stamp)']);
           echo 
             "<tr>
-              <td>".$row['t_stamp']."</td>
+              <td>".$date."</td>
               <td>".$row['question_content']."</td>
               <td>".$row['answer_content']."</td>
             </tr>";
