@@ -59,7 +59,12 @@
           $questionID=rand(0,9999999);
           $question = $_POST["question"];
           $question = strip_tags($question);
-          $question = str_replace('"', "'", $question);
+//          $question = str_replace('<', '\<', $question);
+          //$question = {{$question}}
+          $question = str_replace('"', '\"', $question);
+          $question = str_replace("'","\'", $question);
+          //$conn_set = mysqli_set_charset($conn, "utf8");
+          //$question = mysqli_real_escape_string($question);
           $sql = "INSERT INTO Question (q_id,s_id,username,question_content)
           VALUES (" .$questionID. ",\"" .$_SESSION["sessionID"]. "\",\""
           .$_SESSION["username"]. "\",\"" .$question. "\")";
