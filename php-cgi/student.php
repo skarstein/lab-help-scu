@@ -58,32 +58,24 @@
 
           $questionID=rand(0,9999999);
           $question = $_POST["question"];
-          $question = strip_tags($question);
-//          $question = str_replace('<', '\<', $question);
-          //$question = {{$question}}
-          $question = str_replace('"', '\"', $question);
-          $question = str_replace("'","\'", $question);
-          //$conn_set = mysqli_set_charset($conn, "utf8");
-          //$question = mysqli_real_escape_string($question);
-          $sql = "INSERT INTO Question (q_id,s_id,username,question_content)
-          VALUES (" .$questionID. ",\"" .$_SESSION["sessionID"]. "\",\""
-          .$_SESSION["username"]. "\",\"" .$question. "\")";
 
-          if ($conn->query($sql) === TRUE) {
+          $sql_insert = mysqli_prepare($conn,"INSERT INTO Question (q_id,s_id,username,question_content) VALUES (?,?,?,?)");
+          mysqli_stmt_bind_param($sql_insert,"ssss",$questionID,$_SESSION["sessionID"],$_SESSION["username"],$question);
+
+          if (mysqli_execute($sql_insert) === TRUE) {
               echo "New record created successfully";
               header('Location: '.$_SERVER['REQUEST_URI']);
                
           } else {
-              echo "Error: " .$sql. "<br>" .$conn->error;
+              echo "Error: " .$sql_insert. "<br>" .$conn->error;
           }
         }
 
         $sql = "SELECT UNIX_TIMESTAMP(t_stamp), question_content, answer_content FROM Question WHERE (username = '" .$_SESSION["username"]. "') 
-        AND s_id='" .$_SESSION['sessionID']. "' ORDER BY ";// t_stamp DESC";
-
+        AND s_id='" .$_SESSION['sessionID']. "' ORDER BY ";
         
 
-        if (!empty($_GET['sort'])){// == 'time')
+        if (!empty($_GET['sort'])){
             $sort = $_GET['sort']; 
         } else {
             $sort = "t_stamp";
@@ -104,6 +96,7 @@
         }
  
         $result = $conn->query($sql);
+        
 
         echo '
       <table class="table">
@@ -121,8 +114,8 @@
           echo 
             "<tr>
               <td>".$date."</td>
-              <td>".$row['question_content']."</td>
-              <td>".$row['answer_content']."</td>
+              <td>".htmlspecialchars($row['question_content'])."</td>
+              <td>".htmlspecialchars($row['answer_content'])."</td>
             </tr>";
         }
 

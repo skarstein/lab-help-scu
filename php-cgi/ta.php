@@ -85,8 +85,8 @@
                 "<tr>
                   <td>".$row['username']."</td>
                   <td>".$date."</td>
-                  <td>".$row['question_content']."</td>
-                  <td>".$row['answer_content']."</td>
+                  <td>".htmlspecialchars($row['question_content'])."</td>
+                  <td>".htmlspecialchars($row['answer_content'])."</td>
                 </tr>";
               
             }
