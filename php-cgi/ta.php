@@ -94,13 +94,13 @@
               }
               $date = date("g:ia m/d/y",$row['UNIX_TIMESTAMP(t_stamp)']);
               echo 
-                "<tr onclick='deleteRow(this)'>
+                "<tr>
                   <td style='display:none;'>".$row['q_id']."</td>
                   <td>".$row['username']."</td>
                   <td>".$date."</td>
                   <td>".htmlspecialchars($row['question_content'])."</td>
                   <td>".htmlspecialchars($row['answer_content'])."</td>
-                  <td onclick='deleteRow(this.parentNode)'>
+                  <td>
                     <form>
                         <input class='btn btn-primary' type='submit' value='".$ans_button."' style='width:80px; float: right;'/>
                     </form>

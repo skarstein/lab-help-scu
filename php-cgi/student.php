@@ -50,6 +50,9 @@
           <form>
             <input class="btn btn-primary" type="submit" value="Refresh Questions" style="float: right;"/>
           </form>
+          <br>
+          <br>
+          <br>
         </div>
       </div>
 
@@ -71,7 +74,7 @@
           }
         }
 
-        $sql = "SELECT UNIX_TIMESTAMP(t_stamp), question_content, answer_content FROM Question WHERE (username = '" .$_SESSION["username"]. "') 
+        $sql = "SELECT q_id,UNIX_TIMESTAMP(t_stamp), question_content, answer_content FROM Question WHERE (username = '" .$_SESSION["username"]. "') 
         AND s_id='" .$_SESSION['sessionID']. "' ORDER BY ";
         
 
@@ -100,11 +103,16 @@
 
         echo '
       <table class="table">
+        <col width="80">
+        <col width="500">
+        <col width="500">
+        <col width="100">
         <thead>
           <tr>
             <th><a href="student.php?sort=t_stamp&dir='.$dir.'">Time</th>
             <th><a href="student.php?sort=question_content&dir='.$dir.'">Question</th>
             <th><a href="student.php?sort=answer_content&dir='.$dir.'">Answer</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>';
@@ -113,9 +121,15 @@
           $date = date("g:ia m/d/y",$row['UNIX_TIMESTAMP(t_stamp)']);
           echo 
             "<tr>
+              <td style='display:none;'>".$row['q_id']."</td>
               <td>".$date."</td>
               <td>".htmlspecialchars($row['question_content'])."</td>
               <td>".htmlspecialchars($row['answer_content'])."</td>
+              <td>
+                <form>
+                    <input class='btn btn-secondary' type='submit' value='Delete' onclick='deleteRow(this.parentNode.parentNode.parentNode)' style='width:80px; float: right;'/>
+                </form>
+              </td>
             </tr>";
         }
 
@@ -131,6 +145,8 @@
         </div>
       </form>
     </div>
+
+    <script src="assets/js/student_js.js"></script>
   </body>
 </html>
 
