@@ -2,25 +2,20 @@
     header('Content-Type: application/json');
     require './partials/head.php';
 
+    echo "Here";
+
     $data = json_decode(file_get_contents("php://input"));
+    $q_id = $data->q_id;
     $username = $data->username;
     $question_content = $data->question_content;
+
+    //echo $question_content. " " .$q_id;;
+    $question_content = html_entity_decode($question_content);
+    //echo $question_content;
+
     
-    //echo $username. " " .$question_content;
-
-    //echo "<script>console.log('Logggggggged');</script>";
-
-    $sql = mysqli_prepare($conn,"Delete from Question where username = ? AND question_content = ?");
-    mysqli_stmt_bind_param($sql,"ss",$username,$question_content);
+    $sql = mysqli_prepare($conn,"Delete from Question where q_id = ?");
+    mysqli_stmt_bind_param($sql,"s",$q_id);
     $result = mysqli_execute($sql);
-
-    //$result = $conn->query($sql);
-     
-    //header('Location: http://students.engr.scu.edu/~'.$DEV_WEB_HOME.'/php-cgi/ta.php'); 
-    /*if ($result === TRUE){
-        echo '{message:"Successful"}';
-    } else {
-        echo '{messgae:"Fail"}';
-    }*/
 ?>
 

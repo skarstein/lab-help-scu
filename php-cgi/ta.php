@@ -42,7 +42,7 @@
       <div class="row">
         <div class="col-12">
           <?php
-            $sql = "SELECT UNIX_TIMESTAMP(t_stamp),username,question_content,answer_content FROM Question WHERE s_id='" .$_SESSION['sessionID']. "' ORDER BY ";
+            $sql = "SELECT q_id,UNIX_TIMESTAMP(t_stamp),username,question_content,answer_content FROM Question WHERE s_id='" .$_SESSION['sessionID']. "' ORDER BY ";
 
 
 
@@ -95,6 +95,7 @@
               $date = date("g:ia m/d/y",$row['UNIX_TIMESTAMP(t_stamp)']);
               echo 
                 "<tr onclick='deleteRow(this)'>
+                  <td style='display:none;'>".$row['q_id']."</td>
                   <td>".$row['username']."</td>
                   <td>".$date."</td>
                   <td>".htmlspecialchars($row['question_content'])."</td>
@@ -104,7 +105,7 @@
                         <input class='btn btn-primary' type='submit' value='".$ans_button."' style='width:80px; float: right;'/>
                     </form>
                     <form>
-                        <input class='btn btn-secondary' value='Delete' onclick='deleteRow(this.parentNode.parentNode.parentNode)' style='width:80px; float: right;'/>
+                        <input class='btn btn-secondary' type='submit' value='Delete' onclick='deleteRow(this.parentNode.parentNode.parentNode)' style='width:80px; float: right;'/>
                     </form>
                     
                   </td>
