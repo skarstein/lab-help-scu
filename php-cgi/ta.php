@@ -101,8 +101,9 @@
                   <td>".htmlspecialchars($row['question_content'])."</td>
                   <td>".htmlspecialchars($row['answer_content'])."</td>
                   <td>
+                    <!--<button type='button' id='ans_button' class='btn btn-primary' onclick='showModalWithData(this.parentNode.parentNode)'>".$ans_button."</button> -->
                     <form>
-                        <input class='btn btn-primary' type='submit' value='".$ans_button."' style='width:80px; float: right;'/>
+                        <input class='btn btn-primary' value='".$ans_button."' onclick='showModalWithData(this.parentNode.parentNode.parentNode)' style='width:80px; float: right;'/>
                     </form>
                     <form>
                         <input class='btn btn-secondary' type='submit' value='Delete' onclick='deleteRow(this.parentNode.parentNode.parentNode)' style='width:80px; float: right;'/>
@@ -125,6 +126,42 @@
       </div>
 
 
+
+      <div class="modal fade" id="answerModal" tabindex="-1" role="dialog" aria-labelledby="answerModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="answerModalTitle"></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p id='username'></p>
+              <form>
+                <div class="form-group">
+                  <label for="question-content" class="form-control-label">Question:</label>
+                  <textarea class="form-control" id="question-content" readonly></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="answer_content" class="form-control-label">Answer:</label>
+                  <textarea class="form-control" id="answer-content"></textarea>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+              <form>
+                <input class='btn btn-primary' type='submit' value='Save Answer' onclick='updateQuestion(this.parentNode.parentNode)'/>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
       <?php require './partials/footer.php';?>
       <form action="" method="POST">
         <div class="form-group" style="text-align:center;">
@@ -132,7 +169,6 @@
         </div>
       </form>
     </div>
-
     <script src="assets/js/ta_js.js"></script>
   </body>
 </html>
