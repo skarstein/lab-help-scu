@@ -127,6 +127,9 @@
               <td>".htmlspecialchars($row['answer_content'])."</td>
               <td>
                 <form>
+                    <input class='btn btn-primary' value='View' onclick='showModalWithData(this.parentNode.parentNode.parentNode)' style='width:80px; float: right;'/>
+                </form>
+                <form>
                     <input class='btn btn-secondary' type='submit' value='Delete' onclick='deleteRow(this.parentNode.parentNode.parentNode)' style='width:80px; float: right;'/>
                 </form>
               </td>
@@ -138,6 +141,46 @@
         ?>
         </tbody>
       </table>
+
+
+
+
+      <div class="modal fade" id="questionModal" tabindex="-1" role="dialog" aria-labelledby="questionModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="questionModalTitle"></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <!--<p id='username'></p>-->
+              <form>
+                <div class="form-group">
+                  <label for="question-content" class="form-control-label">Question:</label>
+                  <textarea class="form-control" id="question-content"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="answer_content" class="form-control-label">Answer:</label>
+                  <textarea class="form-control" id="answer-content" readonly></textarea>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+              <form>
+                <input class='btn btn-primary' type='submit' value='Save Question' onclick='updateQuestion(this.parentNode.parentNode)'/>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
       <?php require './partials/footer.php';?>
       <form action="" method="POST">
         <div class="form-group" style="text-align:center;">

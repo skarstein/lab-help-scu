@@ -101,7 +101,6 @@
                   <td>".htmlspecialchars($row['question_content'])."</td>
                   <td>".htmlspecialchars($row['answer_content'])."</td>
                   <td>
-                    <!--<button type='button' id='ans_button' class='btn btn-primary' onclick='showModalWithData(this.parentNode.parentNode)'>".$ans_button."</button> -->
                     <form>
                         <input class='btn btn-primary' value='".$ans_button."' onclick='showModalWithData(this.parentNode.parentNode.parentNode)' style='width:80px; float: right;'/>
                     </form>
@@ -153,7 +152,7 @@
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
               <form>
-                <input class='btn btn-primary' type='submit' value='Save Answer' onclick='updateQuestion(this.parentNode.parentNode)'/>
+                <input class='btn btn-primary' type='submit' value='Save Answer' onclick='updateAnswer(this.parentNode.parentNode)'/>
               </form>
             </div>
           </div>
