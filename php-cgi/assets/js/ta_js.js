@@ -32,7 +32,7 @@ function showModalWithData(row){
     $('#answerModal').modal('show');
 }    
 
-function updateQuestion(row){
+function updateAnswer(row){
 
     var q_id = document.getElementById('answerModalTitle').innerHTML;
     var answer_content = document.getElementById('answer-content').value;
