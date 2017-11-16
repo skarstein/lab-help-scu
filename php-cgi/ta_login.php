@@ -66,10 +66,10 @@
 		    //    }
             } else {
          	    $className = $_POST["classNameInput"]; 
-                    $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+                    $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
                     $sessionID = '';
                     $max = strlen($characters) - 1;
-                    for ($i = 0; $i < 10; $i++) {
+                    for ($i = 0; $i < 4; $i++) {
                 	    $sessionID .= $characters[mt_rand(0, $max)];
                 }      
             }

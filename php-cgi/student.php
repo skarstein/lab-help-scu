@@ -20,6 +20,11 @@
         session_destroy();
         header('Location: student_login.php');
     }
+    if(! empty($_GET["delete"])){
+        $sql="DELETE FROM Question WHERE q_id = '" .$_GET['delete']. "'";
+        $result = $conn->query($sql);
+        header('Location: student.php');
+    }
   ?>
 
   <body>
@@ -130,7 +135,7 @@
                     <input class='btn btn-primary' value='View' onclick='showModalWithData(this.parentNode.parentNode.parentNode)' style='width:80px; float: right;'/>
                 </form>
                 <form>
-                    <input class='btn btn-secondary' type='submit' value='Delete' onclick='deleteRow(this.parentNode.parentNode.parentNode)' style='width:80px; float: right;'/>
+                    <button type='submit' class='btn btn-secondary' name='delete' value='".$row['q_id']."' style='width:80px; float: right;'>Delete</button>
                 </form>
               </td>
             </tr>";
@@ -155,7 +160,6 @@
               </button>
             </div>
             <div class="modal-body">
-              <!--<p id='username'></p>-->
               <form>
                 <div class="form-group">
                   <label for="question-content" class="form-control-label">Question:</label>

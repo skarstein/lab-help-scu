@@ -45,6 +45,7 @@
   background: -o-linear-gradient(#337ab7,#265a88); /* For Opera 11.1 to 12.0 */
   background: -moz-linear-gradient(#337ab7,#265a88); /* For Firefox 3.6 to 15 */
   background: linear-gradient(#337ab7,#265a88);  /* Standard syntax */
+  cursor: pointer;
 }
 
 .btn-alternate {
@@ -54,6 +55,10 @@
   background: -o-linear-gradient(#d3d3d3,#d3d3d3); /* For Opera 11.1 to 12.0 */
   background: -moz-linear-gradient(#d3d3d3,#d3d3d3); /* For Firefox 3.6 to 15 */
   background: linear-gradient(#d3d3d3,#d3d3d3);  /* Standard syntax */
+}
+
+.btn-secondary {
+    cursor: pointer;
 }
 
 tr:hover {
@@ -73,3 +78,4 @@ tr:hover {
   font-size: 24px !important;
   margin-bottom: 0px;
 }
+
