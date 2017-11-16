@@ -22,7 +22,7 @@
             </div>
             <div class="form-group">
               <label for="sessionIdInput">Session ID</label>
-              <input type="password" class="form-control" name="sessionIdInput" placeholder="Session Id">
+              <input type="text" class="form-control" name="sessionIdInput" placeholder="Session Id">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>

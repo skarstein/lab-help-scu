@@ -56,4 +56,3 @@ function updateAnswer(row){
 
 }
     
-

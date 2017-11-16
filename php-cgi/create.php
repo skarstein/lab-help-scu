@@ -40,7 +40,7 @@
               <label for="tacred">TA Credential:</label>
               <input type="password" class="form-control" name="tacred" placeholder="TA Credential"/>
             </div>
-            <button id="#create_submit" type="submit" class="btn btn-primary center">Create Account</button>
+            <button id="#create_submit" action="create.php" type="submit" class="btn btn-primary center">Create Account</button>
           </form>
         </div>
       </div>
@@ -50,15 +50,7 @@
 
     <script type="text/javascript" src="assets/js/create_js.js"></script>
 
-    <?php 
-      if(isset($_GET['success'])){
-        $status = $_GET['success'];
-        if($status == 'true') {
-          $message = "'New account created successfully'";
-          echo "<script>showSuccess($message);</script>";
-        }
-      }
-    ?>
+
 
 
     <?php
@@ -89,7 +81,7 @@
             $validated = true;
           }
           else {
-            $message = "TA Credential Incorrect.";
+            $message = "'TA Credential Incorrect.'";
             echo "<script>showError($message);</script>";
           }
         }
@@ -103,7 +95,8 @@
     if ($validated) {
       $sql = "INSERT INTO User VALUES ('" .$username. "','" .$salt. "','" .$hashed. "','" .$_POST["student_type"]. "')";
       if ($conn->query($sql) === TRUE) {
-        header('Location: create.php?success=true');
+        $message = "'New account created successfully'";
+        echo "<script>showSuccess($message);</script>";
       } 
       else {
         $message = "'User already exists.'";

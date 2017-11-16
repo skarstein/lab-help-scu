@@ -40,7 +40,8 @@
         </div>
       </div>
       <form>
-        <input class="btn btn-primary" type="submit" value="Refresh Questions" style="float: right;"/>
+        <button class="btn btn-success" type="submit" style="float: right;"/><i class="fa fa-refresh" aria-hidden="true"></i>
+Refresh Questions</button>
       </form> 
       <br>
       <br>
@@ -76,11 +77,6 @@
 
         echo '
           <table class="table">
-            <col width="80">
-            <col width="80">
-            <col width="500">
-            <col width="500">
-            <col width="100">
             <thead>
               <tr>
                 <th><a href="ta.php?sort=username&dir='.$dir.'">Student</th>
@@ -100,18 +96,18 @@
               }
               $date = date("g:ia m/d/y",$row['UNIX_TIMESTAMP(t_stamp)']);
               echo 
-                "<tr>
+                "<tr class='normal'>
                   <td style='display:none;'>".$row['q_id']."</td>
                   <td>".$row['username']."</td>
                   <td>".$date."</td>
-                  <td>".htmlspecialchars($row['question_content'])."</td>
-                  <td>".htmlspecialchars($row['answer_content'])."</td>
+                  <td class='word-wrap monospace'>".htmlspecialchars($row['question_content'])."</td>
+                  <td class='word-wrap monospace'>".htmlspecialchars($row['answer_content'])."</td>
                   <td>
                     <form>
                         <input class='btn btn-primary' value='".$ans_button."' onclick='showModalWithData(this.parentNode.parentNode.parentNode)' style='width:80px; float: right;'/>
                     </form>
                     <form>
-                        <button class='btn btn-secondary' type='submit' name='delete' value='".$row['q_id']."' style='width:80px; float: right;'>Delete</button>
+                        <button class='btn btn-link text-danger' type='submit' name='delete' value='".$row['q_id']."' style='width:80px; float: right;'><i class='fa fa-trash-o' aria-hidden='true' style='margin-right:4px;'></i>Delete</button>
                     </form>
                     
                   </td>
@@ -133,7 +129,7 @@
 
 
       <div class="modal fade" id="answerModal" tabindex="-1" role="dialog" aria-labelledby="answerModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="answerModalTitle"></h5>
@@ -147,11 +143,11 @@
               <form>
                 <div class="form-group">
                   <label for="question-content" class="form-control-label">Question:</label>
-                  <textarea class="form-control" id="question-content" readonly></textarea>
+                  <textarea class="form-control monospace" id="question-content" readonly></textarea>
                 </div>
                 <div class="form-group">
                   <label for="answer_content" class="form-control-label">Answer:</label>
-                  <textarea class="form-control" id="answer-content"></textarea>
+                  <textarea class="form-control monospace" id="answer-content"></textarea>
                 </div>
               </form>
             </div>

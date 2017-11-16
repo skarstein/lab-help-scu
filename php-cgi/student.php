@@ -46,14 +46,15 @@
           <form action="" method="POST">
             <div class="form-group">
               <label for="question">Question:</label>
-              <textarea type="text" class="form-control" name="question" placeholder="Question"/></textarea>
+              <textarea type="text" class="form-control monospace" name="question" placeholder="Question"/></textarea>
             </div>
             <div class="form-group">
               <button class="btn btn-primary" type="submit" value="Submit" style="float: left;">Submit</button>
             </div>
           </form>
           <form>
-            <input class="btn btn-primary" type="submit" value="Refresh Questions" style="float: right;"/>
+            <button class="btn btn-success" type="submit" style="float: right;"/><i class="fa fa-refresh" aria-hidden="true"></i>
+Refresh Questions</button>
           </form>
           <br>
           <br>
@@ -108,10 +109,7 @@
 
         echo '
       <table class="table">
-        <col width="80">
-        <col width="500">
-        <col width="500">
-        <col width="100">
+
         <thead>
           <tr>
             <th><a href="student.php?sort=t_stamp&dir='.$dir.'">Time</th>
@@ -125,17 +123,17 @@
         while($row = $result->fetch_assoc()){
           $date = date("g:ia m/d/y",$row['UNIX_TIMESTAMP(t_stamp)']);
           echo 
-            "<tr>
+            "<tr class='normal'>
               <td style='display:none;'>".$row['q_id']."</td>
               <td>".$date."</td>
-              <td>".htmlspecialchars($row['question_content'])."</td>
-              <td>".htmlspecialchars($row['answer_content'])."</td>
+              <td class='word-wrap monospace'>".htmlspecialchars($row['question_content'])."</td>
+              <td class='word-wrap monospace'>".htmlspecialchars($row['answer_content'])."</td>
               <td>
                 <form>
                     <input class='btn btn-primary' value='View' onclick='showModalWithData(this.parentNode.parentNode.parentNode)' style='width:80px; float: right;'/>
                 </form>
                 <form>
-                    <button type='submit' class='btn btn-secondary' name='delete' value='".$row['q_id']."' style='width:80px; float: right;'>Delete</button>
+                    <button type='submit' class='btn btn-link text-danger' name='delete' value='".$row['q_id']."' style='width:80px; float: right;'><i class='fa fa-trash-o' aria-hidden='true' style='margin-right:4px;'></i>Delete</button>
                 </form>
               </td>
             </tr>";
@@ -151,7 +149,7 @@
 
 
       <div class="modal fade" id="questionModal" tabindex="-1" role="dialog" aria-labelledby="questionModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="questionModalTitle"></h5>
@@ -163,11 +161,11 @@
               <form>
                 <div class="form-group">
                   <label for="question-content" class="form-control-label">Question:</label>
-                  <textarea class="form-control" id="question-content"></textarea>
+                  <textarea class="form-control monospace" id="question-content"></textarea>
                 </div>
                 <div class="form-group">
                   <label for="answer_content" class="form-control-label">Answer:</label>
-                  <textarea class="form-control" id="answer-content" readonly></textarea>
+                  <textarea class="form-control monospace" id="answer-content" readonly></textarea>
                 </div>
               </form>
             </div>
