@@ -11,8 +11,9 @@ function deleteRow(row)
             q_id: q_id,
         }),
 
-        success: function () {
-            location.reload();    
+        success: function (result) {
+            console.log(result.status);
+            location.reload(true);
         }
     });
 }
@@ -22,11 +23,11 @@ function deleteRow(row)
 function showModalWithData(row){
     var x = row.cells;
     console.log(row);
-    var q_id = x[0].innerHTML;
+    var timestamp = x[1].innerHTML;
 //    var username = x[1].innerHTML;
     var question_content = x[2].innerHTML;
     var answer_content = x[3].innerHTML;
-    $('#questionModalTitle').html(q_id);
+    $('#questionModalTitle').html(timestamp);
     $('#question-content').html(question_content);
     $('#answer-content').html(answer_content);
 //    $('#username').html("User: " + username);

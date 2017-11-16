@@ -16,8 +16,13 @@
     if(! empty($_POST["logout"])){
         session_destroy();
         header('Location: ta_login.php');
-    }
 
+    }
+     if(! empty($_GET["delete"])){
+        $sql="DELETE FROM Question WHERE q_id = '" .$_GET['delete']. "'";
+        $result = $conn->query($sql);
+        header('Location: student.php');
+     }
   ?>
 
   <body>
@@ -27,8 +32,9 @@
         <div class="home-top col-12 col-md-5 center">
           <h1>
             <?php 
-            echo "" .$_SESSION["className"]. " Q&A Session " .$_SESSION["sessionID"]. "<br>";
-            echo "your username is: " .$_SESSION["username"]. "<br>";
+            echo "Username: " .$_SESSION["username"]. "<br>";
+            echo "Class Name: " .$_SESSION["className"]. "<br>";
+            echo "Session ID: " .$_SESSION["sessionID"]. "<br>";
             ?>
           </h1>
         </div>
@@ -105,7 +111,7 @@
                         <input class='btn btn-primary' value='".$ans_button."' onclick='showModalWithData(this.parentNode.parentNode.parentNode)' style='width:80px; float: right;'/>
                     </form>
                     <form>
-                        <input class='btn btn-secondary' type='submit' value='Delete' onclick='deleteRow(this.parentNode.parentNode.parentNode)' style='width:80px; float: right;'/>
+                        <button class='btn btn-secondary' type='submit' name='delete' value='".$row['q_id']."' style='width:80px; float: right;'>Delete</button>
                     </form>
                     
                   </td>

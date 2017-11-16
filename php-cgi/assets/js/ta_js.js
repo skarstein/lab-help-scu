@@ -13,7 +13,7 @@ function deleteRow(row)
         }),
 
         success: function () {
-            location.reload();    
+            location.reload(forceGet);    
         }
     });
 }           
@@ -21,11 +21,11 @@ function deleteRow(row)
 function showModalWithData(row){
     var x = row.cells;
     console.log(row);
-    var q_id = x[0].innerHTML;
+    var timestamp = x[2].innerHTML;
     var username = x[1].innerHTML;
     var question_content = x[3].innerHTML;
     var answer_content = x[4].innerHTML;
-    $('#answerModalTitle').html(q_id);
+    $('#answerModalTitle').html(timestamp);
     $('#question-content').html(question_content);
     $('#answer-content').html(answer_content);
     $('#username').html("User: " + username);
@@ -47,7 +47,7 @@ function updateAnswer(row){
         }),
 
         success: function () {
-            location.reload();    
+            location.reload(forceGet);    
         }
     });
 

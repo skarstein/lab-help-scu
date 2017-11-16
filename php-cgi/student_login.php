@@ -41,7 +41,7 @@
             $valid = false;
             
             $username = $_POST["usernameInput"];
-            $sessionID = $_POST["sessionIdInput"];
+            $sessionID = strtoupper($_POST["sessionIdInput"]);
             $password = $_POST["passwordInput"];
     
             $sql = "SELECT * FROM User WHERE username = '" .$username. "'";
