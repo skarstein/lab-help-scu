@@ -26,7 +26,7 @@ function showModalWithData(row){
     var username = x[1].innerHTML;
     var question_content = x[3].innerHTML;
     var answer_content = x[4].innerHTML;
-    $('#questionID').html(q_id);
+    $('#questionID').val(q_id);
     $('#answerModalTitle').html(timestamp);
     $('#question-content').html(question_content);
     $('#answer-content').html(answer_content);
