@@ -19,11 +19,19 @@
         header('Location: ta_login.php');
 
     }
-     if(! empty($_GET["delete"])){
-        $sql="DELETE FROM Question WHERE q_id = '" .$_GET['delete']. "'";
+
+    if (! empty($_POST["delete"])){
+      if (! empty($_POST["delete-id"])){
+        $sql="DELETE FROM Question WHERE q_id = '" .$_POST["delete-id"]. "'";
         $result = $conn->query($sql);
         header('Location: student.php');
-     }
+      } else {
+        echo "<script>console.log('No q_id')</script>";
+      }
+    } else {
+      echo "<script>console.log('No delete')</script>";
+    }
+
     if (! empty($_POST['answer-content'])){
       if (! empty($_POST['q_id'])){
         $answer_content = $_POST['answer-content'];
@@ -123,15 +131,10 @@ Refresh Questions</button>
                         <input class='btn btn-primary' value='".$ans_button."' onclick='showModalWithData(this.parentNode.parentNode.parentNode)' style='width:80px; float: right;'/>
                     </form>
                     <form>
-                        <button class='btn btn-link text-danger' type='submit' name='delete' value='".$row['q_id']."' style='width:80px; float: right;'><i class='fa fa-trash-o' aria-hidden='true' style='margin-right:4px;'></i>Delete</button>
+                        <button class='btn btn-link text-danger' value='Delete' onclick='showDeleteModal(".$row['q_id'].")' style='width:80px; float: right;'><i class='fa fa-trash-o' aria-hidden='true' style='margin-right:4px;'>Delete</button>
                     </form>
-                    
                   </td>
                 </tr>";
-              
-//                <form>
-//                    <input class='btn btn-primary' type='submit' value='Answer' style='float: right;'/>
-//                </form>"; 
             }
 
             $conn->close();
@@ -143,6 +146,28 @@ Refresh Questions</button>
       </div>
 
 
+      <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="deleteModalTitle">Confirm Deletion</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+              <div class="modal-body">
+                <p>Are you sure you want to delete this question?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <form action="" method="POST"id="new-form">
+                  <input form ="new-form" type="text" id="deleteQuestionID" name="delete-id" style='display:none;'>
+                  <input class='btn btn-primary' type='submit' name="delete" value='Delete Question'>
+                </form>
+              </div>
+          </div>
+        </div>
+      </div>
 
       <div class="modal fade" id="answerModal" tabindex="-1" role="dialog" aria-labelledby="answerModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
