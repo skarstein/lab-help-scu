@@ -6,6 +6,7 @@
   <?php require './partials/head.php';?>
 
   <?php
+    echo "<script>console.log('Hello')</script>";
     session_start();
     if (! isset($_SESSION["username"])){
        header('Location: http://students.engr.scu.edu/~'.$DEV_WEB_HOME.'/php-cgi/ta_login.php'); 
@@ -23,6 +24,21 @@
         $result = $conn->query($sql);
         header('Location: student.php');
      }
+    if (! empty($_POST['answer-content'])){
+      if (! empty($_POST['q_id'])){
+        $answer_content = $_POST['answer-content'];
+        $q_id = $_POST['q_id'];
+        $answer_content = html_entity_decode($answer_content);
+
+        $sql = mysqli_prepare($conn,"Update Question SET answer_content = ? where q_id = ?");
+        mysqli_stmt_bind_param($sql,"ss",$answer_content,$q_id);
+        $result = mysqli_execute($sql);
+      } else {
+        echo "<script>console.log('No q_id')</script>";
+      }
+    } else {  
+      echo "<script>console.log('No answer')</script>";
+    }
   ?>
 
   <body>
@@ -133,31 +149,28 @@ Refresh Questions</button>
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="answerModalTitle"></h5>
-              <h6 class="modal-title" id="questionID" style='display:none;'></h6>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
-              <p id='username'></p>
-              <form>
+            <form action="" method="POST" id="answer-form">
+              <input form="answer-form" class="modal-title" id="questionID" name="q_id" style='display:none;'>
+              <div class="modal-body">
+                <p id='username'></p>
                 <div class="form-group">
                   <label for="question-content" class="form-control-label">Question:</label>
                   <textarea class="form-control monospace" id="question-content" readonly></textarea>
                 </div>
                 <div class="form-group">
-                  <label for="answer_content" class="form-control-label">Answer:</label>
-                  <textarea class="form-control monospace" id="answer-content"></textarea>
+                  <label for="answer-content" class="form-control-label">Answer:</label>
+                  <textarea form="answer-form" class="form-control monospace" name="answer-content" id="answer-content"></textarea>
                 </div>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-              <form>
-                <input class='btn btn-primary' type='submit' value='Save Answer' onclick='updateAnswer(this.parentNode.parentNode)'/>
-              </form>
-            </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input class='btn btn-primary' type='submit' value='Save Answer'>
+              </div>
+            </form>
           </div>
         </div>
       </div>
