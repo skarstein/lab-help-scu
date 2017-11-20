@@ -1,6 +1,5 @@
 function showModalWithData(row){
     var x = row.cells;
-    console.log(row);
     var timestamp = x[2].innerHTML;
     var q_id = x[0].innerHTML;
     var username = x[1].innerHTML;
@@ -14,3 +13,7 @@ function showModalWithData(row){
     $('#answerModal').modal('show');
 }    
 
+function showTaDeleteModal(q_id){
+    $('#taDeleteQuestionID').val(q_id);
+    $('#taDeleteModal').modal('show');
+}

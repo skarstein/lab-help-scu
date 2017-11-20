@@ -11,3 +11,7 @@ function showModalWithData(row){
     $('#questionModal').modal('show');
 }
 
+function showStudentDeleteModal(q_id){
+    $('#stDeleteQuestionID').val(q_id);
+    $('#stDeleteModal').modal('show');
+}
