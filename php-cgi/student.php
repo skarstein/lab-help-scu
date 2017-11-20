@@ -21,9 +21,27 @@
         header('Location: student_login.php');
     }
     if(! empty($_GET["delete"])){
-        $sql="DELETE FROM Question WHERE q_id = '" .$_GET['delete']. "'";
-        $result = $conn->query($sql);
+        $q_id = $_GET["delete"];
+        $sql = mysqli_prepare($conn,"Delete from Question where q_id = ?");
+        mysqli_stmt_bind_param($sql,"s",$q_id);
+        $result = mysqli_execute($sql);
         header('Location: student.php');
+    }
+
+    if (! empty($_POST['question-content'])){
+      if (! empty($_POST['q_id'])){
+        $question_content = $_POST['question-content'];
+        $q_id = $_POST['q_id'];
+        $question_content = html_entity_decode($question_content);
+
+        $sql = mysqli_prepare($conn,"Update Question SET question_content = ? where q_id = ?");
+        mysqli_stmt_bind_param($sql,"ss",$question_content,$q_id);
+        $result = mysqli_execute($sql);
+      } else {
+        echo "<script>console.log('No q_id')</script>";
+      }
+    } else {  
+      echo "<script>console.log('No question')</script>";
     }
   ?>
 
@@ -157,25 +175,24 @@ Refresh Questions</button>
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
-              <form>
+            <form action="" method="POST" id="question-form">
+              <input form="question-form" class="modal-title" id="questionID" name="q_id" style='display:none;'>
+              <div class="modal-body">
                 <div class="form-group">
                   <label for="question-content" class="form-control-label">Question:</label>
-                  <textarea class="form-control monospace" id="question-content"></textarea>
+                  <textarea form="question-form" class="form-control monospace" name="question-content" id="question-content"></textarea>
                 </div>
                 <div class="form-group">
-                  <label for="answer_content" class="form-control-label">Answer:</label>
+                  <label for="answer-content" class="form-control-label">Answer:</label>
                   <textarea class="form-control monospace" id="answer-content" readonly></textarea>
                 </div>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
-              <form>
-                <input class='btn btn-primary' type='submit' value='Save Question' onclick='updateQuestion(this.parentNode.parentNode)'/>
-              </form>
-            </div>
+                <input class='btn btn-primary' type='submit' value='Save Question'>
+              </div>
+            </form>
           </div>
         </div>
       </div>

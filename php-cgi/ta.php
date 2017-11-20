@@ -161,7 +161,6 @@ Refresh Questions</button>
                   <label for="question-content" class="form-control-label">Question:</label>
                   <textarea class="form-control monospace" id="question-content" readonly></textarea>
                 </div>
-                
                 <div class="form-group">
                   <label for="answer-content" class="form-control-label">Answer:</label>
                   <textarea form="answer-form" class="form-control monospace" name="answer-content" id="answer-content"></textarea>

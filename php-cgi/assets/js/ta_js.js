@@ -1,23 +1,3 @@
-function deleteRow(row)
-{
-    var x = row.cells;
-    var q_id = x[0].innerHTML;
-
-    var response;
-    $.ajax({
-        type: "POST",
-        url:  "http://students.engr.scu.edu/~ngoodpas/php-cgi/delete_row_function.php",
-        dataType: 'json',
-        data: JSON.stringify({
-            q_id: q_id,
-        }),
-
-        success: function () {
-            location.reload(forceGet);    
-        }
-    });
-}           
-
 function showModalWithData(row){
     var x = row.cells;
     console.log(row);
@@ -34,25 +14,3 @@ function showModalWithData(row){
     $('#answerModal').modal('show');
 }    
 
-function updateAnswer(row){
-
-    var q_id = document.getElementById('questionID').innerHTML;
-    var answer_content = document.getElementById('answer-content').value;
-
-    $.ajax({
-        type: "POST",
-        url:  "http://students.engr.scu.edu/~ngoodpas/php-cgi/update_answer_function.php",
-        dataType: 'json',
-        data: JSON.stringify({
-            q_id: q_id,
-            answer_content: answer_content
-        }),
-
-        success: function () {
-            location.reload(forceGet);    
-        }
-    });
-
-
-}
-    
