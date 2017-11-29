@@ -66,7 +66,7 @@
 		    //    }
             } else {
          	    $className = $_POST["classNameInput"]; 
-                    $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+                    $characters = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
                     $sessionID = '';
                     $max = strlen($characters) - 1;
                     for ($i = 0; $i < 4; $i++) {
@@ -91,9 +91,7 @@
                         ];
                         //generate hashed password
                         $hashed = password_hash($password,  PASSWORD_BCRYPT, $options);
-                        echo "hashed is: " .$hashed. "<br>";
                         mysqli_data_seek($result,0);
-                        echo "password is: " .$result->fetch_assoc()["password"]. "<br>";
                         mysqli_data_seek($result,0);
     	                if ($result->fetch_assoc()["password"] == $hashed){
     		                mysqli_data_seek($result,0);
