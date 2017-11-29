@@ -39,7 +39,7 @@
               <label for="classNameInput">Class Name</label>
               <input type="text" class="form-control" name="classNameInput" placeholder="Class Name">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Login</button>
           </form>
           <p id = "p"></p>
         </div>

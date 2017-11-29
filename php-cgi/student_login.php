@@ -24,7 +24,7 @@
               <label for="sessionIdInput">Session ID</label>
               <input type="text" class="form-control" name="sessionIdInput" placeholder="Session Id">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Login</button>
           </form>
         </div>
       </div>
