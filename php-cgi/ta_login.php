@@ -2,7 +2,7 @@
 
 <html>
 
-  <title>TA Help Seeking System | TA Login</title>
+  <title>Laboratory Help Seeking System | TA Login</title>
 
   <?php require './partials/head.php';?>
 
@@ -11,7 +11,7 @@
     <div class="container main">
       <div class="row">
         <div class="col-sm-12 col-md-7 mx-auto">
-          <h1 class="form-header">TA Help Seeking System<br />TA Login</h1>
+          <h1 class="form-header">Lab Help Seeking System<br />TA Login</h1>
           <form role="form" id="ta_login_form" action = "ta_login.php" method ="post">
             <div class="form-group">
               <label for="usernameInput">Username</label>
@@ -129,7 +129,7 @@
                 }
                 if ($valid){
                     $_SESSION["username"] = $username;
-                    $_SESSION["sessionID"] = $sessionID;
+                    $_SESSION["sessionID"] = strtoupper($sessionID);
                     $_SESSION["userType"] = "TA";
                     header('Location: ta.php');
                     exit();

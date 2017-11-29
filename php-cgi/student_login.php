@@ -1,7 +1,7 @@
 <!doctype html>
 
 <html>
-  <title>TA Help Seeking System | Student Login</title>
+  <title>Laboratory Help Seeking System | Student Login</title>
 
   <?php require './partials/head.php';?>
 
@@ -10,7 +10,7 @@
     <div class="container main">
       <div class="row">
         <div class="col-sm-12 col-md-7 mx-auto">
-          <h1 class="form-header">TA Help Seeking System<br />Student Login</h1>
+          <h1 class="form-header">Lab Help Seeking System<br />Student Login</h1>
           <form role="form" id="student_login_form" action = "student_login.php" method ="post">
             <div class="form-group">
               <label for="usernameInput">Username</label>
