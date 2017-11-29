@@ -76,7 +76,7 @@
         $username = ($_POST["username"]);
         if ($_POST["tacred"] !== '') {
           //if tacred is correct, create ta account
-          if($_POST["tacred"] == "tempkey") {  
+          if($_POST["tacred"] == $TA_CREDENTIAL) {  
             //insert hashed password and salt into User table for TA
             $validated = true;
           }
