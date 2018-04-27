@@ -1,6 +1,5 @@
 # Labratory Help-seeking System for SCU COEN 174L
-Nicholas Goodpaster, Sean Karstein, Bryson Lee
-Fall 2017
+Nicholas Goodpaster, Sean Karstein, Bryson Lee - Fall 2017
 
 We have built a web application that improves the efficiency of the question asking and
 answering process in engineering lab sessions at Santa Clara University. Currently, students
