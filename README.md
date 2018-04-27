@@ -11,3 +11,6 @@ Our application streamlines the question asking process and allows for a more en
 experience for both students and teaching assistants.
 
 For additional documentation and instillation guidance see [Lab Help-Seeking System Report.pdf](https://github.com/skarstein/lab-help-scu/blob/master/Lab%20Help-Seeking%20System%20Report.pdf)
+
+Try a live version here: http://students.engr.scu.edu/~blee/php-cgi/create.php
+(The TA Credential is 'takey')
